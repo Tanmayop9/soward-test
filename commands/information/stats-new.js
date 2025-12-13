@@ -127,7 +127,7 @@ class StatsCommand extends BaseCommand {
                     value:
                         `${client.emoji.dot} **Platform:** \`${platform}\`\n` +
                         `${client.emoji.dot} **Node.js:** \`${nodeVersion}\`\n` +
-                        `${client.emoji.dot} **Discord.js:** \`v14.16.1\`\n` +
+                        `${client.emoji.dot} **Discord.js:** \`v${require('discord.js').version}\`\n` +
                         `${client.emoji.dot} **Version:** \`v2-alpha-1\``,
                     inline: true
                 }
