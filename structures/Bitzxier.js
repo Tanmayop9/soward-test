@@ -1,17 +1,14 @@
 const { Client, Collection, Partials, WebhookClient, Options } = require('discord.js')
 const fs = require('fs')
-const mongoose = require('mongoose')
 const Utils = require('./util')
 const { glob } = require('glob')
 const { promisify } = require('util')
-const { Database } = require('quickmongo')
+const Database = require('./database')
 const axios = require('axios')
-const { QuickDB } = require("quick.db");
 const { ClusterClient, getInfo } = require('discord-hybrid-sharding');
 const Sql = require('better-sqlite3')
-const redis = require('redis')
 const { Destroyer } = require('destroyer-fast-cache')
-module.exports = class Bitzxier extends Client {
+module.exports = class Friday extends Client {
     constructor() {
         super({
             intents: 53608191,
@@ -37,18 +34,18 @@ module.exports = class Bitzxier extends Client {
         this.commands = new Collection()
         this.categories = fs.readdirSync('./commands/')
         this.emoji = {
-            tick: '<:tick:1180470648053702657>',
-            cross: '<:crosss:1180470543896551438>',
-            dot: '<:bitzxier_dot_1:1181287240870146139>',
-            process : '<a:red_loading:1221326019986980894>',
-            disable : '<:biztxier_disable_yes:1180432405501333617><:bitzxier_enable_no:1180432231282516050>',
-            enable : '<:bitzxier_disable_no:1180518054518587454><:bitzxier_enable_yes:1180431183620882472>',
-            protect : '<a:bitzxier_antinuke:1180431827438153821>',
-            hii : '<:bitzxier:1180449001934442516>'
+            tick: '✅',
+            cross: '❌',
+            dot: '•',
+            process : '⏳',
+            disable : '🔴',
+            enable : '🟢',
+            protect : '🛡️',
+            hii : '👋'
         }
 
         this.util = new Utils(this)
-        this.color = 0xff0000
+        this.color = 0x5865F2
         this.support = `https://discord.gg/S7Ju9RUpbT`
         this.cooldowns = new Collection()
         this.snek = require('axios')
@@ -134,13 +131,9 @@ this.rest.on('rateLimited', (info) => {
 
     async initializedata() {
         this.cache = new Destroyer()
-        this.redis = new redis.createClient({ url : 'redis://redis:BITZXIER@5.161.76.60:1503/0' })
-//        this.redis.connect()
-        this.logger.log(`Connecting to Redis...`)
-
-        this.logger.log('Redis Cache Connected', 'ready')
-        this.logger.log(`Connecting to Sql...`)
-        this.logger.log('Sql Database Connected', 'ready')
+        this.db = new Database()
+        await this.db.connect()
+        this.logger.log('JoshDB Database Connected', 'ready')
     }
     async SQL() {
         this.warn = new Sql(`${process.cwd()}/Database/warns.db`);
@@ -168,13 +161,8 @@ this.rest.on('rateLimited', (info) => {
     }
 
     async initializeMongoose() {
-        this.db = new Database(this.config.MONGO_DB+"")
-        this.db.connect()
-        this.logger.log(`Connecting to MongoDb...`)
-        mongoose.connect(this.config.MONGO_DB,{   
-        maxPoolSize: 500
-});
-        this.logger.log('Mongoose Database Connected', 'ready')
+        // Mongoose removed - all data now stored in data-sets directory
+        this.logger.log('Using JoshDB for all data storage', 'ready')
     }
 
     async loadEvents() {

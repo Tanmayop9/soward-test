@@ -1,8 +1,32 @@
-const mongo = require('mongoose')
+// Boost Model - JoshDB Implementation
+class BoostModel {
+    constructor(db) {
+        this.db = db;
+    }
 
-const Schema = new mongo.Schema({
-    Guild: String,
-    Boost: String
-})
+    async findOne(query) {
+        const key = `boost_${query.Guild}`;
+        return await this.db.get(key);
+    }
 
-module.exports = mongo.model('boost', Schema)
+    async create(data) {
+        const key = `boost_${data.Guild}`;
+        await this.db.set(key, data);
+        return data;
+    }
+
+    async findOneAndUpdate(query, update, options) {
+        const key = `boost_${query.Guild}`;
+        const existing = await this.db.get(key);
+        const newData = { ...existing, ...update };
+        await this.db.set(key, newData);
+        return newData;
+    }
+
+    async save() {
+        // For compatibility
+        return this;
+    }
+}
+
+module.exports = (db) => new BoostModel(db);
