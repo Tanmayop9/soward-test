@@ -208,6 +208,55 @@ All new classes include comprehensive JSDoc comments:
 - Usage examples
 - Author information
 
+## 🤖 Self-Maintenance Features
+
+### Auto-Updater (`structures/AutoUpdater.js`)
+- ✅ Automatic update checking from GitHub
+- ✅ Safe update application with backup creation
+- ✅ Rollback on failure
+- ✅ Health checks before/after updates
+- ✅ Configurable update intervals
+- ✅ Webhook notifications
+- ✅ Scheduled restart after updates
+
+### Feature Flag System (`structures/FeatureManager.js`)
+- ✅ Dynamic feature enabling/disabling
+- ✅ Gradual rollout support (0-100%)
+- ✅ Per-guild feature activation
+- ✅ Usage tracking and statistics
+- ✅ Beta feature support
+- ✅ Database persistence
+
+### Update Management Commands
+```bash
+# Check update status
+&update status
+
+# Check for available updates
+&update check
+
+# Apply available update
+&update apply
+```
+
+### Feature Management Commands
+```bash
+# List all features
+&features list
+
+# Enable a feature
+&features enable <name> [rollout%]
+
+# Disable a feature
+&features disable <name>
+
+# Update rollout percentage
+&features rollout <name> <percentage>
+
+# Check feature status
+&features status <name>
+```
+
 ## 🔄 Future Improvements
 
 Recommended next steps:
@@ -215,13 +264,13 @@ Recommended next steps:
 1. Add unit tests with Jest
 2. Add integration tests for commands
 3. Implement TypeScript for better type safety
-4. Add CI/CD pipeline
+4. Add CI/CD pipeline with automated testing
 5. Implement structured logging with Winston
 6. Add performance monitoring with metrics
-7. Implement caching layer with Redis
-8. Add database migrations system
-9. Implement feature flags
-10. Add telemetry and analytics
+7. Add database migrations system
+8. Add telemetry and analytics
+9. Implement A/B testing framework
+10. Add AI-powered error analysis
 
 ## 👥 Credits
 
