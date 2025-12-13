@@ -1,0 +1,13 @@
+{
+    "TOKEN": "",
+    "WEBHOOK_URL": "",
+    "cooldown": true,
+    "owner": [],
+    "friday": [],
+    "mainmode": [],
+    "premium": [],
+    "admin": [],
+    "np": [],
+    "invite": "",
+    "baseText": "```\n<> - Required | () - Optional```"
+}
