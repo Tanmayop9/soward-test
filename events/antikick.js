@@ -9,7 +9,7 @@ module.exports = async (client) => {
         const logs = auditLogs?.entries?.first()
         if (!logs) return
         const { executor, target, createdTimestamp } = logs
-        let = difference = Date.now() - createdTimestamp
+        let difference = Date.now() - createdTimestamp
         if (difference > 3600000) return
         await client.db
             ?.get(`${member.guild.id}_${executor?.id}_wl`)

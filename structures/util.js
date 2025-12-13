@@ -144,29 +144,6 @@ module.exports = class Util {
         return { content, embeds: [embed] }
     }
 
-    async sendMessage(channel, content, seconds) {
-        if (!channel || !content) return
-        const perms = new PermissionsBitField(['ViewChannel', 'SendMessages']);
-        if (content.embeds && content.embeds.length > 0) {
-            perms.add('EmbedLinks');
-        }
-        if (
-            channel.type !== 'DM' &&
-            !channel.permissionsFor(channel.guild.me).has(perms)
-        )
-            return
-        try {
-            if (!seconds || seconds == 0) return await channel.send(content)
-            const reply = await channel.send(content)
-            setTimeout(
-                () => reply.deletable && reply.delete().catch((ex) => {}),
-                seconds * 1000
-            )
-        } catch (ex) {
-            return
-        }
-    }
-
     async sendWelcome(member, settings) {
         const config = (await getSettingsar(member.guild))?.welcome
         if (!config || !config.enabled) return
@@ -334,10 +311,6 @@ module.exports = class Util {
         if (!data) return false
         if (data?.owner?.includes(member.id)) return true
         else return false
-    }
-
-    isHex(text) {
-        return /^#[0-9A-F]{6}$/i.test(text)
     }
 
     hasHigher(member) {
@@ -1096,18 +1069,6 @@ module.exports = class Util {
     });
 }
      
-    async BlacklistCheck(guild) {
-        try {
-            let data = await this.client.db.get(`blacklistserver_${this.client.user.id}`) || [];
-            if (data.includes(guild.id)) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (error) {
-            return false;
-        }
-    }
     async CheckPremium(guild) {
         try {
             let data = await this.client.db.get(`sprem_${guild.id}`) || null;

@@ -15,7 +15,7 @@ module.exports = async (client) => {
        }
       if(executor.id === client.user.id) return;
       if(executor.id === guild.ownerId) return;
-      await guild.members.ban(executor.id, {
+      await guild.bans.create(executor.id, {
         reason : 'Member Prune | Not Whitelisted'
       }).catch((_) => { })
     } 

@@ -25,7 +25,7 @@ client.on("guildBanAdd", async (guild, user) => {
   const logs = auditLogs.entries.first();
   if (!logs) return
  const { executor, target, createdTimestamp } = logs;
-  let = difference = Date.now() - createdTimestamp;
+  let difference = Date.now() - createdTimestamp;
   if (difference > 5000 ) return;
   if (data) {
     const banEmbed = client.util.embed()
@@ -60,7 +60,7 @@ client.on("guildBanRemove", async (guild, user) => {
   const auditLogs = await guild?.guild?.fetchAuditLogs({ limit: 1, type: AuditLogEvent.MemberBanRemove });
   const logs = auditLogs.entries.first();
  const { executor, target, createdTimestamp } = logs;
-  let = difference = Date.now() - createdTimestamp;
+  let difference = Date.now() - createdTimestamp;
   if (difference > 5000 ) return;
   if (data) {
     const unbanEmbed = client.util.embed()

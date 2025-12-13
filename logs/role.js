@@ -23,7 +23,7 @@ return;
   const auditLogs = await role.guild.fetchAuditLogs({ limit: 1, type: AuditLogEvent.RoleCreate });
   const logs = auditLogs.entries.first();
  const { executor, target, createdTimestamp } = logs;
-  let = difference = Date.now() - createdTimestamp;
+  let difference = Date.now() - createdTimestamp;
   if (difference > 5000 ) return;
 if (data) {
   const roleCreateEmbed = client.util.embed()
@@ -75,7 +75,7 @@ client.on("roleDelete", async (role) => {
     const auditLogs = await role.guild.fetchAuditLogs({ limit: 1, type: AuditLogEvent.RoleDelete });
     const logs = auditLogs.entries.first();
    const { executor, target, createdTimestamp } = logs;
-    let = difference = Date.now() - createdTimestamp;
+    let difference = Date.now() - createdTimestamp;
     if (difference > 5000 ) return;
   if(data) {
     const roleDeleteEmbed = new EmbedBuilder()

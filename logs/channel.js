@@ -128,7 +128,7 @@ client.on("channelCreate", async (channel) => {
   const auditLogs = await channel.guild.fetchAuditLogs({ limit: 1, type: AuditLogEvent.ChannelCreate });
   const logs = auditLogs.entries.first();
  const { executor, target, createdTimestamp } = logs;
-  let = difference = Date.now() - createdTimestamp;
+  let difference = Date.now() - createdTimestamp;
   if (difference > 5000 ) return;  
   if(executor.id === client.user.id) return
 if(data) {
@@ -206,7 +206,7 @@ client.on("channelDelete", async (channel) => {
 const auditLogs = await channel.guild.fetchAuditLogs({ limit: 1, type: AuditLogEvent.ChannelDelete });
 const logs = auditLogs.entries.first();
 const { executor, target, createdTimestamp } = logs;
-  let = difference = Date.now() - createdTimestamp;
+  let difference = Date.now() - createdTimestamp;
   if (difference > 5000 ) return;  
 
   if(executor.id === client.user.id) return
@@ -282,7 +282,7 @@ value : `${executor.id}`
     const auditLogs = await n.guild.fetchAuditLogs({ limit: 1, type: AuditLogEvent.ChannelUpdate });
     const logs = auditLogs.entries.first();
    const { executor, target, createdTimestamp } = logs;
-    let = difference = Date.now() - createdTimestamp;
+    let difference = Date.now() - createdTimestamp;
     if (difference > 5000 ) return;  
     if(executor.id === client.user.id) return
 
