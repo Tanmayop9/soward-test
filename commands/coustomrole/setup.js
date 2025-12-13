@@ -426,7 +426,7 @@ module.exports = {
                   `[\`${++c}\`] | **${message.guild.prefix}${d}**: <@&${data.roles[index]}> | \`${data.roles[index]}\`` // Correctly concatenating values
                 ) // Joining the array into a single string with line breaks only between entries
                 
-                return client.util.BitzxierPagination(mappedData, `Custom roles in ${message.guild.name}`, client, message);
+                return client.util.pagination(mappedData, `Custom roles in ${message.guild.name}`, client, message);
                 }
         } else if (input == 'reset') {
             const data = await client.db?.get(`customrole_${message.guild.id}`)

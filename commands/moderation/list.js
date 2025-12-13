@@ -1,6 +1,6 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const lodash = require('lodash');
-//const BitzxierPagination = require('./BitzxierPagination'); // Assuming your pagination function is in this file
+// Pagination function is available via client.util.pagination
 
 module.exports = {
     name: 'list',
@@ -120,6 +120,6 @@ module.exports = {
         }
 
         // Call the pagination function
-        client.util.BitzxierPagination(membersList, title, client, message);
+        client.util.pagination(membersList, title, client, message);
     }
 };

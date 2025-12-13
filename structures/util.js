@@ -892,7 +892,7 @@ module.exports = class Util {
 		return new EmbedBuilder()
 	}
 
-   async BitzxierPagination(membersList, title, client, message) {
+   async pagination(membersList, title, client, message) {
     const lodash = require('lodash');
     
     // Split members list into chunks of 10 items per page

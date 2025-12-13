@@ -1,0 +1,41 @@
+{
+  "env": {
+    "node": true,
+    "es2024": true
+  },
+  "extends": ["eslint:recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2024,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-console": "off",
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    "no-var": "error",
+    "prefer-const": "error",
+    "prefer-arrow-callback": "warn",
+    "prefer-template": "warn",
+    "prefer-destructuring": ["warn", { "object": true, "array": false }],
+    "object-shorthand": "warn",
+    "no-param-reassign": "warn",
+    "consistent-return": "warn",
+    "no-else-return": "warn",
+    "no-lonely-if": "warn",
+    "prefer-promise-reject-errors": "error",
+    "no-throw-literal": "error",
+    "require-await": "warn",
+    "no-return-await": "warn",
+    "prefer-spread": "warn",
+    "prefer-rest-params": "warn",
+    "arrow-body-style": ["warn", "as-needed"],
+    "no-useless-return": "warn",
+    "no-nested-ternary": "warn",
+    "yoda": "warn",
+    "eqeqeq": ["error", "always"],
+    "no-eval": "error",
+    "no-implied-eval": "error",
+    "no-new-func": "error",
+    "no-new-wrappers": "error",
+    "no-proto": "error"
+  }
+}

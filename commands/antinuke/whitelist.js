@@ -4,14 +4,14 @@ const {
     ActionRowBuilder,
     ButtonStyle
 } = require('discord.js')
-const { Bitzxier } = require('../../structures/Bitzxier')
+const { Friday } = require('../../structures/friday')
 module.exports = {
     name: 'whitelist',
     aliases: ['wl'],
     category: 'security',
     premium: false,
     /**
-     * @param {Bitzxier} client
+     * @param {Friday} client
      */
     run: async (client, message, args) => {
 

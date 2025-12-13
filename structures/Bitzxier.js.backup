@@ -1,13 +1,12 @@
-const { Client, Collection, Partials, WebhookClient, Options } = require('discord.js')
-const fs = require('fs')
-const Utils = require('./util')
-const { glob } = require('glob')
-const { promisify } = require('util')
-const Database = require('./database')
-const axios = require('axios')
+const { Client, Collection, Partials, WebhookClient } = require('discord.js');
+const fs = require('fs');
+const Utils = require('./util');
+const Database = require('./database');
 const { ClusterClient, getInfo } = require('discord-hybrid-sharding');
-const Sql = require('better-sqlite3')
-const { Destroyer } = require('destroyer-fast-cache')
+const Sql = require('better-sqlite3');
+const { Destroyer } = require('destroyer-fast-cache');
+const { ErrorHandler } = require('./ErrorHandler');
+const ConfigValidator = require('./ConfigValidator');
 module.exports = class Friday extends Client {
     constructor() {
         super({
