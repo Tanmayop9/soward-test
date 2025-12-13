@@ -17,7 +17,7 @@ class BoostModel {
 
     async findOneAndUpdate(query, update, options) {
         const key = `boost_${query.Guild}`;
-        const existing = await this.db.get(key);
+        const existing = await this.db.get(key) || {};
         const newData = { ...existing, ...update };
         await this.db.set(key, newData);
         return newData;
@@ -29,4 +29,12 @@ class BoostModel {
     }
 }
 
-module.exports = (db) => new BoostModel(db);
+let _db = null;
+const setDb = (db) => { _db = db; };
+
+module.exports = (db) => {
+    if (db) return new BoostModel(db);
+    if (_db) return new BoostModel(_db);
+    throw new Error('Boost Model: Database not initialized');
+};
+module.exports.setDb = setDb;

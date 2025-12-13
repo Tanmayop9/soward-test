@@ -1,65 +1,15 @@
-const mongoose = require('mongoose')
-
-const Schema = mongoose.Schema({
-    _id: {
-        type: String,
-        required: true
-    },
-    data: {
-        name: String,
-        region: String,
-        owner: {
-            id: String,
-            tag: String
-        },
-        joinedAt: Date,
-        leftAt: Date,
-        bots: {
-            type: Number,
-            default: 0
-        }
-    },
-    booster: {
-        type: String
-    },
-    welcome: {
-        autodel: {
-            type: Number,
-            default: 0
-        },
-        enabled: Boolean,
-        channel: String,
-        content: String,
-        embed: {
-            image: String,
-            description: String,
-            color: String,
-            title: String,
-            thumbnail: Boolean,
-            footer: String
-        }
-    },
-    autorole: {
-        type: Array,
-        default: []
-    },
-    autorolebot: {
-        type: Array,
-        default: []
-    },
-    mainrole : {
-        type : Array,
-        default : []
+// Autorole Model - JoshDB Implementation
+class AutoroleModel {
+    constructor(db) {
+        this.db = db;
     }
-})
 
-const Model = mongoose.model('guild2', Schema)
-
-module.exports = {
-    getSettingsar: async (guild) => {
-        let guildData = await Model.findOne({ _id: guild.id })
+    async getSettingsar(guild) {
+        const key = `autorole_${guild.id}`;
+        let guildData = await this.db.get(key);
+        
         if (!guildData) {
-            guildData = new Model({
+            guildData = {
                 _id: guild.id,
                 data: {
                     name: guild.name,
@@ -68,14 +18,60 @@ module.exports = {
                         id: guild.ownerId,
                         tag: guild.members.cache.get(guild.ownerId)?.user.tag
                     },
-                    joinedAt: guild.joinedAt
+                    joinedAt: guild.joinedAt,
+                    bots: 0
+                },
+                booster: null,
+                welcome: {
+                    autodel: 0,
+                    enabled: false,
+                    channel: null,
+                    content: null,
+                    embed: {
+                        image: null,
+                        description: null,
+                        color: null,
+                        title: null,
+                        thumbnail: false,
+                        footer: null
+                    }
+                },
+                autorole: [],
+                autorolebot: [],
+                mainrole: [],
+                save: async () => {
+                    await this.db.set(key, guildData);
+                    return guildData;
                 }
-            })
+            };
+            
             if (!guild.id) {
-                throw new Error('Guild ID is undefined')
+                throw new Error('Guild ID is undefined');
             }
-            await guildData.save()
+            
+            await this.db.set(key, guildData);
+        } else {
+            // Add save method to existing data
+            guildData.save = async () => {
+                await this.db.set(key, guildData);
+                return guildData;
+            };
         }
-        return guildData
+        
+        return guildData;
     }
 }
+
+// Export wrapper that gets db from client
+let _db = null;
+const setDb = (db) => { _db = db; };
+const getSettingsar = async (guild) => {
+    if (!_db && guild.client && guild.client.db) {
+        _db = guild.client.db;
+    }
+    if (!_db) throw new Error('Database not initialized');
+    const model = new AutoroleModel(_db);
+    return await model.getSettingsar(guild);
+};
+
+module.exports = { getSettingsar, setDb };

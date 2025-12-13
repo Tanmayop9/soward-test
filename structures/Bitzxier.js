@@ -133,6 +133,24 @@ this.rest.on('rateLimited', (info) => {
         this.cache = new Destroyer()
         this.db = new Database()
         await this.db.connect()
+        
+        // Initialize models with database
+        this.models = {
+            afk: require('../models/afk')(this.db),
+            boost: require('../models/boost')(this.db),
+            guildconfig: require('../models/guildconfig')(this.db),
+            mainrole: require('../models/mainrole')(this.db),
+            ticket: require('../models/ticket')(this.db)
+        }
+        
+        // Set database for all models to make them globally accessible
+        require('../models/afk').setDb(this.db);
+        require('../models/boost').setDb(this.db);
+        require('../models/guildconfig').setDb(this.db);
+        require('../models/mainrole').setDb(this.db);
+        require('../models/ticket').setDb(this.db);
+        require('../models/autorole').setDb(this.db);
+        
         this.logger.log('JoshDB Database Connected', 'ready')
     }
     async SQL() {

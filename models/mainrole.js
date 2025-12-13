@@ -1,40 +1,63 @@
-const mongoose = require('mongoose')
-
-const Schema = mongoose.Schema({
-    _id: {
-        type: String,
-        required: true
-    },
-
-    mainrole: {
-        type: Array,
-        default: []
+// MainRole Model - JoshDB Implementation
+class MainRoleModel {
+    constructor(db) {
+        this.db = db;
     }
-})
 
-const Model = mongoose.model('guild', Schema)
-
-module.exports = {
-    getSettings: async (guild) => {
-        let guildData = await Model.findOne({ _id: guild.id })
+    async getSettings(guild) {
+        const key = `mainrole_${guild.id}`;
+        let guildData = await this.db.get(key);
+        
         if (!guildData) {
-            guildData = new Model({
+            guildData = {
                 _id: guild.id,
+                mainrole: [],
                 data: {
                     name: guild.name,
                     region: guild.preferredLocale,
                     owner: {
                         id: guild.ownerId
-                        // tag: guild.members.cache.get(guild.ownerId)?.user.tag
                     },
                     joinedAt: guild.joinedAt
+                },
+                save: async () => {
+                    await this.db.set(key, guildData);
+                    return guildData;
                 }
-            })
+            };
+            
             if (!guild.id) {
-                throw new Error('Guild ID iws undefined')
+                throw new Error('Guild ID is undefined');
             }
-            await guildData.save()
+            
+            await this.db.set(key, guildData);
+        } else {
+            // Add save method to existing data
+            guildData.save = async () => {
+                await this.db.set(key, guildData);
+                return guildData;
+            };
         }
-        return guildData
+        
+        return guildData;
     }
 }
+
+let _db = null;
+const setDb = (db) => { _db = db; };
+const getSettings = async (guild) => {
+    if (!_db && guild.client && guild.client.db) {
+        _db = guild.client.db;
+    }
+    if (!_db) throw new Error('Database not initialized');
+    const model = new MainRoleModel(_db);
+    return await model.getSettings(guild);
+};
+
+module.exports = (db) => {
+    if (db) return new MainRoleModel(db);
+    if (_db) return new MainRoleModel(_db);
+    throw new Error('MainRole Model: Database not initialized');
+};
+module.exports.setDb = setDb;
+module.exports.getSettings = getSettings;
