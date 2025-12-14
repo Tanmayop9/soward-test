@@ -8,6 +8,7 @@
 import { spawn } from 'child_process';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { existsSync } from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -66,6 +67,12 @@ async function setup() {
         console.log('Starting the bot...');
         console.log('='.repeat(60) + '\n');
 
+        // Verify the compiled file exists
+        const entryPoint = join(__dirname, 'dist', 'shards.js');
+        if (!existsSync(entryPoint)) {
+            throw new Error(`Entry point not found: ${entryPoint}. Build may have failed.`);
+        }
+
         // Run the bot (this will keep running)
         const botProcess = spawn('node', ['dist/shards.js'], {
             stdio: 'inherit',
@@ -83,16 +90,26 @@ async function setup() {
             process.exit(code || 0);
         });
 
-        // Handle termination signals
-        process.on('SIGINT', () => {
-            console.log('\n\nReceived SIGINT, shutting down...');
-            botProcess.kill('SIGINT');
-        });
+        // Handle termination signals with graceful shutdown
+        let isShuttingDown = false;
+        
+        const shutdown = (signal) => {
+            if (isShuttingDown) return;
+            isShuttingDown = true;
+            
+            console.log(`\n\nReceived ${signal}, shutting down gracefully...`);
+            botProcess.kill(signal);
+            
+            // Force kill after 10 seconds if process hasn't exited
+            setTimeout(() => {
+                console.log('Force killing process...');
+                botProcess.kill('SIGKILL');
+                process.exit(1);
+            }, 10000);
+        };
 
-        process.on('SIGTERM', () => {
-            console.log('\n\nReceived SIGTERM, shutting down...');
-            botProcess.kill('SIGTERM');
-        });
+        process.on('SIGINT', () => shutdown('SIGINT'));
+        process.on('SIGTERM', () => shutdown('SIGTERM'));
 
     } catch (error) {
         console.error('\n✗ Setup failed:', error.message);
