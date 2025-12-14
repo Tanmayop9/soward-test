@@ -13,6 +13,9 @@ import { existsSync } from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Configuration constants
+const SHUTDOWN_TIMEOUT = 10000; // 10 seconds
+
 /**
  * Execute a command and stream output
  * @param {string} command - Command to execute
@@ -28,7 +31,6 @@ function executeCommand(command, args, description) {
 
         const child = spawn(command, args, {
             stdio: 'inherit',
-            shell: true,
             cwd: __dirname
         });
 
@@ -76,7 +78,6 @@ async function setup() {
         // Run the bot (this will keep running)
         const botProcess = spawn('node', ['dist/shards.js'], {
             stdio: 'inherit',
-            shell: true,
             cwd: __dirname
         });
 
@@ -100,12 +101,12 @@ async function setup() {
             console.log(`\n\nReceived ${signal}, shutting down gracefully...`);
             botProcess.kill(signal);
             
-            // Force kill after 10 seconds if process hasn't exited
+            // Force kill after timeout if process hasn't exited
             setTimeout(() => {
                 console.log('Force killing process...');
                 botProcess.kill('SIGKILL');
                 process.exit(1);
-            }, 10000);
+            }, SHUTDOWN_TIMEOUT);
         };
 
         process.on('SIGINT', () => shutdown('SIGINT'));
