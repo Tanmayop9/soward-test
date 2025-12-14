@@ -1,6 +1,6 @@
 import { Worker } from 'worker_threads';
 import path from 'path';
-import fs from 'fs';.promises;
+import fs from 'fs/promises';
 import { WebhookClient } from 'discord.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';

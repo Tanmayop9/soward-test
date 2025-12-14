@@ -1,10 +1,6 @@
-import { EmbedBuilder,
+import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-
-    ActionRowBuilder,
-    ButtonBuilder,
-    ButtonStyle } from 'discord.js';
 // Config loaded from client.config
 
 export default {

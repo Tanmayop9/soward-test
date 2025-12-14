@@ -1,13 +1,6 @@
-import { EmbedBuilder,
+import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, PermissionsBitField, Collection, WebhookClient, ButtonStyle } from 'discord.js';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-
-    ActionRowBuilder,
-    ButtonBuilder,
-    PermissionsBitField,
-    Collection,
-    WebhookClient,
-    ButtonStyle } from 'discord.js';
 // Config loaded from client.config
 const mediaConfigCache = new Map();
 const mcooldown = new Set()

@@ -1,10 +1,6 @@
-import { Message,
+import { Message, Client, ActionRowBuilder, ButtonBuilder } from 'discord.js';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-
-    Client,
-    ActionRowBuilder,
-    ButtonBuilder } from 'discord.js';
 // Config loaded from client.config
 export default {
     name: 'blacklist',

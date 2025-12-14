@@ -1,6 +1,5 @@
 import { Message, Client, EmbedBuilder, Permissions, ActionRowBuilder, ButtonBuilder, Collection, ButtonStyle } from 'discord.js';
-
-import { default: wait } from 'wait';
+import wait from 'wait';
 export default {
     name: 'hideall',
     aliases: [],
