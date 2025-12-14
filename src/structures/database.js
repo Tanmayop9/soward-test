@@ -79,25 +79,35 @@ class Database {
     async push(key, value) {
         if (!this.connected)
             await this.connect();
-        const current = await this.db.get(key);
-        if (Array.isArray(current)) {
-            current.push(value);
-            await this.db.set(key, current);
-        } else {
-            await this.db.set(key, [value]);
+        try {
+            const current = await this.db.get(key);
+            if (Array.isArray(current)) {
+                const updated = [...current, value];
+                await this.db.set(key, updated);
+            } else {
+                await this.db.set(key, [value]);
+            }
+            return true;
         }
-        return true;
+        catch (error) {
+            return false;
+        }
     }
     async pull(key, value) {
         if (!this.connected)
             await this.connect();
-        const current = await this.db.get(key);
-        if (Array.isArray(current)) {
-            const filtered = current.filter(item => item !== value);
-            await this.db.set(key, filtered);
-            return true;
+        try {
+            const current = await this.db.get(key);
+            if (Array.isArray(current)) {
+                const filtered = current.filter(item => item !== value);
+                await this.db.set(key, filtered);
+                return true;
+            }
+            return false;
         }
-        return false;
+        catch (error) {
+            return false;
+        }
     }
 }
 export default Database;
