@@ -1,5 +1,5 @@
-const { Message, Client, EmbedBuilder } = require('discord.js')
-module.exports = {
+import { Message, Client, EmbedBuilder } from 'discord.js';
+export default {
     name: 'prefix',
     aliases: ['setprefix'],
     category: 'mod',

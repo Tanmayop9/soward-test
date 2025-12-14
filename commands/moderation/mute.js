@@ -1,7 +1,7 @@
-const { EmbedBuilder, PermissionsBitField } = require('discord.js');
-const ms = require('ms');
+import { EmbedBuilder, PermissionsBitField } from 'discord.js';
+import ms from 'ms';
 
-module.exports = {
+export default {
     name: 'mute',
     aliases: ['timeout', 'stfu'],
     category: 'mod',

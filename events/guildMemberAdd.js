@@ -1,10 +1,10 @@
-const { getSettingsar } = require('../models/autorole')
+import { getSettingsar } from '../models/autorole.js';
 
 /**
  * @param {import('@src/structures').BotClient} client
  * @param {import('discord.js').GuildMember} member
  */
-module.exports = async (client) => {
+export default async (client) => {
     client.on('guildMemberAdd', async (member) => {
         let check =  await client.util.BlacklistCheck(member.guild)
         if(check) return  

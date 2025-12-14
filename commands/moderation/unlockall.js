@@ -1,7 +1,7 @@
-const { Message, Client, EmbedBuilder, Permissions, ActionRowBuilder, ButtonBuilder, Collection, ButtonStyle } = require('discord.js');
+import { Message, Client, EmbedBuilder, Permissions, ActionRowBuilder, ButtonBuilder, Collection, ButtonStyle } from 'discord.js';
 
-const { default: wait } = require('wait')
-module.exports = {
+import { default: wait } from 'wait';
+export default {
     name: 'unlockall',
     aliases: [],
     category: 'mod',

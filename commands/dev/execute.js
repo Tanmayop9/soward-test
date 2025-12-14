@@ -1,15 +1,13 @@
-const {
-    Message,
+import { Message,
     Client,
     MessageEmbed,
     ActionRowBuilder,
-    ButtonBuilder
-} = require('discord.js')
-const { exec } = require('child_process')
+    ButtonBuilder } from 'discord.js';
+import { exec } from 'child_process';
 const choice = ['🚫']
 const saixd = ['']
 
-module.exports = {
+export default {
     name: 'execute',
     aliases: ['exec'],
     category: 'owner',

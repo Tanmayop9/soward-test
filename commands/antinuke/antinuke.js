@@ -1,7 +1,7 @@
-const { EmbedBuilder, PermissionFlagsBits } = require('discord.js');
-const wait = require('wait');
+import { EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import wait from 'wait';
 
-module.exports = {
+export default {
     name: 'antinuke',
     aliases: ['antiwizz', 'an'],
     category: 'security',

@@ -54,10 +54,10 @@ const getSettings = async (guild) => {
     return await model.getSettings(guild);
 };
 
-module.exports = (db) => {
+export default (db) => {
     if (db) return new MainRoleModel(db);
     if (_db) return new MainRoleModel(_db);
     throw new Error('MainRole Model: Database not initialized');
 };
-module.exports.setDb = setDb;
-module.exports.getSettings = getSettings;
+export const setDb = setDb;
+export const getSettings = getSettings;

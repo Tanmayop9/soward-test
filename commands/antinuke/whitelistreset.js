@@ -1,6 +1,6 @@
-const { ActionRowBuilder, ButtonBuilder } = require('discord.js')
+import { ActionRowBuilder, ButtonBuilder } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'whitelistreset',
     aliases: ['wlreset'],
     category: 'security',

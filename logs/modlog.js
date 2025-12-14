@@ -1,7 +1,7 @@
-const wait = require('wait')
-const { EmbedBuilder, AuditLogEvent, ChannelType, WebhookClient } = require('discord.js'); // Ensure correct import
+import wait from 'wait';
+import { EmbedBuilder, AuditLogEvent, ChannelType, WebhookClient } from 'discord.js';
 
-module.exports = async (client) => { 
+export default async (client) => { 
 
 client.on("guildBanAdd", async (guild, user) => {
   let check =  await client.util.BlacklistCheck(guild.guild)

@@ -50,10 +50,10 @@ class AfkModel {
 let _db = null;
 const setDb = (db) => { _db = db; };
 
-module.exports = (db) => {
+export default (db) => {
     if (db) return new AfkModel(db);
     // If called without db, use stored db
     if (_db) return new AfkModel(_db);
     throw new Error('AFK Model: Database not initialized');
 };
-module.exports.setDb = setDb;
+export const setDb = setDb;

@@ -1,12 +1,13 @@
-const {
-    EmbedBuilder,
+import { EmbedBuilder,
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
     version,
     ActionRowBuilder,
     ButtonBuilder,
-    ButtonStyle
-} = require('discord.js')
-this.config = require(`${process.cwd()}/config.json`)
-module.exports = {
+    ButtonStyle } from 'discord.js';
+// Config loaded from client.config
+export default {
     name: 'premium',
     aliases: ['prime'],
     category: 'info',

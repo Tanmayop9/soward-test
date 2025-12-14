@@ -1,11 +1,9 @@
-const {
-    StringSelectMenuBuilder,
+import { StringSelectMenuBuilder,
     ButtonBuilder,
     ActionRowBuilder,
-    ButtonStyle
-} = require('discord.js')
-const { Friday } = require('../../structures/friday')
-module.exports = {
+    ButtonStyle } from 'discord.js';
+import { Friday } from '../../structures/friday.js';
+export default {
     name: 'whitelist',
     aliases: ['wl'],
     category: 'security',

@@ -1,13 +1,11 @@
-const {
-    Message,
+import { Message,
     Client,
     MessageEmbed,
     ActionRowBuilder,
     ButtonBuilder,
-    StringSelectMenuBuilder
-} = require('discord.js')
+    StringSelectMenuBuilder } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'vcunmute',
     category: 'voice',
     run: async (client, message, args) => {

@@ -1,4 +1,4 @@
-const mongo = require('mongoose');
+import mongo from 'mongoose';
 
 const Schema = new mongo.Schema({
     Guild: { type: String, default: null }, // `null` for global AFK

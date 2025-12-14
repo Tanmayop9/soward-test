@@ -1,18 +1,27 @@
-const { Client, Collection, Partials, WebhookClient } = require('discord.js');
-const fs = require('fs');
-const Utils = require('./util');
-const Database = require('./database');
-const { ClusterClient, getInfo } = require('discord-hybrid-sharding');
-const Sql = require('better-sqlite3');
-const { Destroyer } = require('destroyer-fast-cache');
-const { ErrorHandler } = require('./ErrorHandler');
-const ConfigValidator = require('./ConfigValidator');
-const CommandHandler = require('./CommandHandler');
-const PremiumManager = require('./PremiumManager');
-const HealthCheck = require('./HealthCheck');
-const CacheManager = require('./CacheManager');
-const { COLORS, EMOJIS, VERSION } = require('./constants');
-module.exports = class Friday extends Client {
+import { Client, Collection, Partials, WebhookClient } from 'discord.js';
+import fs from 'fs';
+import Utils from './util.js';
+import Database from './database.js';
+import { ClusterClient, getInfo } from 'discord-hybrid-sharding';
+import Sql from 'better-sqlite3';
+import { Destroyer } from 'destroyer-fast-cache';
+import { ErrorHandler } from './ErrorHandler.js';
+import ConfigValidator from './ConfigValidator.js';
+import CommandHandler from './CommandHandler.js';
+import PremiumManager from './PremiumManager.js';
+import HealthCheck from './HealthCheck.js';
+import CacheManager from './CacheManager.js';
+import { COLORS, EMOJIS, VERSION } from './constants.js';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { createRequire } from 'module';
+import logger from './logger.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
+
+export default class Friday extends Client {
     constructor() {
         super({
             intents: 53608191,
@@ -31,19 +40,9 @@ module.exports = class Friday extends Client {
         }} })
         this.setMaxListeners(Infinity);
         this.cluster = new ClusterClient(this);
-        this.config = require(`${process.cwd()}/config.json`);
-        
-        // Validate configuration
-        const validation = ConfigValidator.validate(this.config);
-        if (!validation.success) {
-            console.error('Configuration validation failed:', validation.errors);
-            process.exit(1);
-        }
-        if (validation.warnings.length > 0) {
-            console.warn('Configuration warnings:', validation.warnings);
-        }
-        
-        this.logger = require('./logger');
+        // Config will be loaded asynchronously in init
+        this.config = null;
+        this.logger = logger;
         this.ready = false;
         this.rateLimits = new Collection();
         this.commands = new Collection();
@@ -125,22 +124,30 @@ module.exports = class Friday extends Client {
         this.db = new Database()
         await this.db.connect()
         
+        // Dynamically import models
+        const { default: afkModel } = await import('../models/afk.js');
+        const { default: boostModel } = await import('../models/boost.js');
+        const { default: guildconfigModel } = await import('../models/guildconfig.js');
+        const { default: mainroleModel } = await import('../models/mainrole.js');
+        const { default: ticketModel } = await import('../models/ticket.js');
+        const { default: autoroleModel } = await import('../models/autorole.js');
+        
         // Initialize models with database
         this.models = {
-            afk: require('../models/afk')(this.db),
-            boost: require('../models/boost')(this.db),
-            guildconfig: require('../models/guildconfig')(this.db),
-            mainrole: require('../models/mainrole')(this.db),
-            ticket: require('../models/ticket')(this.db)
+            afk: afkModel(this.db),
+            boost: boostModel(this.db),
+            guildconfig: guildconfigModel(this.db),
+            mainrole: mainroleModel(this.db),
+            ticket: ticketModel(this.db)
         }
         
         // Set database for all models to make them globally accessible
-        require('../models/afk').setDb(this.db);
-        require('../models/boost').setDb(this.db);
-        require('../models/guildconfig').setDb(this.db);
-        require('../models/mainrole').setDb(this.db);
-        require('../models/ticket').setDb(this.db);
-        require('../models/autorole').setDb(this.db);
+        afkModel.setDb(this.db);
+        boostModel.setDb(this.db);
+        guildconfigModel.setDb(this.db);
+        mainroleModel.setDb(this.db);
+        ticketModel.setDb(this.db);
+        autoroleModel.setDb(this.db);
         
         this.logger.log('JoshDB Database Connected', 'ready')
     }
@@ -175,19 +182,23 @@ module.exports = class Friday extends Client {
     }
 
     async loadEvents() {
-        fs.readdirSync('./events/').forEach((file) => {
-            let eventName = file.split('.')[0]
-            require(`${process.cwd()}/events/${file}`)(this)
-            this.logger.log(`Updated Event ${eventName}.`, 'event')
-        })
+        const files = fs.readdirSync('./events/');
+        for (const file of files) {
+            const eventName = file.split('.')[0];
+            const { default: eventHandler } = await import(`${process.cwd()}/events/${file}`);
+            eventHandler(this);
+            this.logger.log(`Updated Event ${eventName}.`, 'event');
+        }
     }
 
     async loadlogs() {
-        fs.readdirSync('./logs/').forEach((file) => {
-            let logevent = file.split('.')[0]
-            require(`${process.cwd()}/logs/${file}`)(this)
-            this.logger.log(`Updated Logs ${logevent}.`, 'event')
-        })
+        const files = fs.readdirSync('./logs/');
+        for (const file of files) {
+            const logevent = file.split('.')[0];
+            const { default: logHandler } = await import(`${process.cwd()}/logs/${file}`);
+            logHandler(this);
+            this.logger.log(`Updated Logs ${logevent}.`, 'event');
+        }
     }
         
     async loadMain() {
@@ -206,16 +217,34 @@ module.exports = class Friday extends Client {
                 )
             }
         }
-        commandFiles.map((value) => {
-            const file = require(value)
-            const splitted = value.split('/')
-            const directory = splitted[splitted.length - 2]
+        
+        for (const value of commandFiles) {
+            const { default: file } = await import(value);
+            const splitted = value.split('/');
+            const directory = splitted[splitted.length - 2];
             if (file.name) {
-                const properties = { directory, ...file }
-                this.commands.set(file.name, properties)
+                const properties = { directory, ...file };
+                this.commands.set(file.name, properties);
             }
-        })
+        }
         this.logger.log(`Updated ${this.commands.size} Commands.`, 'cmd')
+    }
+    
+    async loadConfig() {
+        const config = await import(`${process.cwd()}/config.json`, {
+            assert: { type: 'json' }
+        }).then(module => module.default);
+        this.config = config;
+        
+        // Validate configuration
+        const validation = ConfigValidator.validate(this.config);
+        if (!validation.success) {
+            console.error('Configuration validation failed:', validation.errors);
+            process.exit(1);
+        }
+        if (validation.warnings.length > 0) {
+            console.warn('Configuration warnings:', validation.warnings);
+        }
     }
 }
 

@@ -5,10 +5,13 @@
  * @description Remove premium access from a user
  */
 
-const { EmbedBuilder } = require('discord.js')
-const config = require(`${process.cwd()}/config.json`)
+import { EmbedBuilder } from 'discord.js';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
-module.exports = {
+// Config loaded from client.config
+
+export default {
     name: 'removepremium',
     aliases: ['remprem', 'premium-', 'delpremium'],
     category: 'Owner',

@@ -1,6 +1,6 @@
-const { MessageEmbed, ActionRowBuilder, ButtonBuilder } = require('discord.js')
+import { MessageEmbed, ActionRowBuilder, ButtonBuilder } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'wlisted',
     aliases: ['wlist', 'whitelisted'],
     category: 'security',

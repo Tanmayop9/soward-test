@@ -5,9 +5,9 @@
  * @description Ready event handler - Called when bot is ready
  */
 
-const { ActivityType } = require('discord.js');
+import { ActivityType } from 'discord.js';
 
-module.exports = async (client) => {
+export default async (client) => {
     client.on('ready', async () => {
         client.ready = true;
 

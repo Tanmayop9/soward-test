@@ -1,6 +1,6 @@
-const { MessageEmbed, ButtonBuilder, ActionRowBuilder } = require("discord.js");
-const axios = require("axios")
-module.exports = {
+import { MessageEmbed, ButtonBuilder, ActionRowBuilder } from 'discord.js';
+import axios from 'axios';
+export default {
     name: 'truth',
     category: 'info',
     premium: false,

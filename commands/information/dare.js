@@ -1,5 +1,5 @@
-const axios = require("axios")
-module.exports = {
+import axios from 'axios';
+export default {
     name: 'dare',
     category: 'info',
     premium: false,

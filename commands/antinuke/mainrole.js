@@ -1,6 +1,6 @@
-const { getSettings } = require('../../models/mainrole')
+import { getSettings } from '../../models/mainrole.js';
 
-module.exports = {
+export default {
     name: 'mainrole',
     aliases: ['mr'],
     category: 'security',

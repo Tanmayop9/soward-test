@@ -1,6 +1,6 @@
-const { AuditLogEvent } = require('discord.js')
+import { AuditLogEvent } from 'discord.js';
 
-module.exports = async (client) => {
+export default async (client) => {
     client.on('emojiUpdate', async (o, n) => {
         let check = await client.util.BlacklistCheck(o.guild)
         if (check) return

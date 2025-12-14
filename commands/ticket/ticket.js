@@ -1,7 +1,7 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, PermissionsBitField } = require('discord.js');
-const ticketPanelSchema = require('../../models/ticket'); // Adjust the path accordingly
+import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, PermissionsBitField } from 'discord.js';
+import ticketPanelSchema from '../../models/ticket.js'; // Adjust the path accordingly
 const lastRenameMap = new Map();
-module.exports = {
+export default {
     name: 'ticket',
     aliases: [],
     premium: false,

@@ -1,8 +1,8 @@
-const { EmbedBuilder, ButtonBuilder, ActionRowBuilder,ButtonStyle  } = require('discord.js');
-const Discord = require('discord.js');
+import { EmbedBuilder, ButtonBuilder, ActionRowBuilder,ButtonStyle } from 'discord.js';
+import Discord from 'discord.js';
 const cooldown = new Set();
 
-module.exports = {
+export default {
   name: 'embed',
   category: 'info',
   premium: false,

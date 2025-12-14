@@ -1,6 +1,9 @@
-const { MessageEmbed } = require('discord.js')
-this.config = require(`${process.cwd()}/config.json`)
-module.exports = {
+import { MessageEmbed } from 'discord.js';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+// Config loaded from client.config
+export default {
     name: `serverslist`,
     category: `Owner`,
     aliases: [`slist`],

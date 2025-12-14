@@ -1,5 +1,5 @@
 
-module.exports = {
+export default {
     name: 'unwhitelist',
     aliases: ['uwl'],
     category: 'security',

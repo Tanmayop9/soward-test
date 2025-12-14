@@ -1,11 +1,9 @@
-const {
-    Message,
+import { Message,
     Client,
     ChannelType,
     PermissionsBitField,
-    EmbedBuilder
-} = require('discord.js');
-module.exports = {
+    EmbedBuilder } from 'discord.js';
+export default {
     name: 'autologs',
     aliases: ['autolog'],
     cooldown: 5,

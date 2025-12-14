@@ -1,4 +1,4 @@
-module.exports = async (client) => {
+export default async (client) => {
     client.on('guildMemberUpdate', async (o, n) => {
         if (o.guild.id !== '873228243757596672') return;
         let support = await client.guilds.cache.get(`873228243757596672`)

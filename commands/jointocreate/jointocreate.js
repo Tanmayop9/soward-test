@@ -1,8 +1,8 @@
-const { Client, Intents, ActionRowBuilder, ButtonBuilder, EmbedBuilder, ButtonStyle, ChannelType } = require('discord.js');
-const mongoose = require('mongoose');
-const GuildConfig = require('../../models/guildconfig'); // Adjust the path according to your project structure
+import { Client, Intents, ActionRowBuilder, ButtonBuilder, EmbedBuilder, ButtonStyle, ChannelType } from 'discord.js';
+import mongoose from 'mongoose';
+import GuildConfig from '../../models/guildconfig.js'; // Adjust the path according to your project structure
 
-module.exports = {
+export default {
     name: 'jointocreate',
     aliases: ['jtc', 'vcgen'],
     category: 'jointocreate',

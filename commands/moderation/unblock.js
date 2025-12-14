@@ -1,13 +1,11 @@
-const {
-    Message,
+import { Message,
     Client,
     EmbedBuilder,
     ActionRowBuilder,
     ButtonBuilder,
-    StringSelectMenuBuilder
-} = require('discord.js')
+    StringSelectMenuBuilder } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'unblock',
     aliases: [],
     category: 'mod',

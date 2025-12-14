@@ -1,6 +1,6 @@
-const { JoshProvider } = require('@joshdb/json');
-const { Josh } = require('@joshdb/core');
-const path = require('path');
+import { JoshProvider } from '@joshdb/json';
+import { Josh } from '@joshdb/core';
+import path from 'path';
 
 class Database {
     constructor() {

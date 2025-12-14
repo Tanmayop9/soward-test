@@ -116,7 +116,7 @@ async function getUserFromMention(message, mention) {
     return message.guild.members.fetch(id) || message.member;
 }
 
-module.exports = {
+export default {
     name: 'cute',
     aliases: ['cuteness'],
     category: 'info',

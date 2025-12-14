@@ -1,5 +1,5 @@
 
-module.exports = {
+export default {
     name: 'boostcount',
     aliases : ['bc'],
     category: 'info',

@@ -1,4 +1,4 @@
-module.exports = async (client) => {
+export default async (client) => {
     /* On guild join */
     client.on('guildCreate', async (guild) => {
         let data = await client.db.get(`blacklistserver_${client.user.id}`) || [];

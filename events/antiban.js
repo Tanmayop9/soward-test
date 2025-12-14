@@ -1,6 +1,6 @@
-const { AuditLogEvent } = require('discord.js');
+import { AuditLogEvent } from 'discord.js';
 
-module.exports = async (client) => {
+export default async (client) => {
     client.on('guildBanAdd', async (ban) => {
         const antinukeEnabled = await client.db.get(`${ban.guild.id}_antinuke`);
 

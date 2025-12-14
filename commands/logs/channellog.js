@@ -1,10 +1,8 @@
-const {
-    Message,
+import { Message,
     Client,
-    EmbedBuilder
-} = require('discord.js')
-const { values } = require('lodash')
-module.exports = {
+    EmbedBuilder } from 'discord.js';
+import { values } from 'lodash';
+export default {
     name: 'channellog',
     aliases: [],
     category: 'logging',

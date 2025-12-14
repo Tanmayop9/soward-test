@@ -1,4 +1,5 @@
 {
+    "type": "module",
     "dependencies": {
         "@joshdb/core": "^1.2.7",
         "@joshdb/json": "^1.0.5",

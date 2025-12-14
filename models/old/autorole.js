@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema({
     _id: {
@@ -55,7 +55,7 @@ const Schema = mongoose.Schema({
 
 const Model = mongoose.model('guild2', Schema)
 
-module.exports = {
+export default {
     getSettingsar: async (guild) => {
         let guildData = await Model.findOne({ _id: guild.id })
         if (!guildData) {

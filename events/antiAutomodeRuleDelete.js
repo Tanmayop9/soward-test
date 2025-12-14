@@ -1,6 +1,6 @@
-const { AuditLogEvent } = require('discord.js')
+import { AuditLogEvent } from 'discord.js';
 
-module.exports = async (client) => {
+export default async (client) => {
     client.on('guildAuditLogEntryCreate', async (audit) => {
         const { executor, target } = audit
         let check = await client.db.get(`blacklistserver_${client.user.id}`) || [];

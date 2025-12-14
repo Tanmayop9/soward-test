@@ -1,5 +1,4 @@
-const { 
-  ActionRowBuilder, 
+import { ActionRowBuilder, 
   StringSelectMenuBuilder, 
   ModalBuilder, 
   TextInputBuilder, 
@@ -9,11 +8,10 @@ const {
   UserSelectMenuBuilder,
   ComponentType, 
   ButtonStyle,
-  ButtonBuilder
-} = require('discord.js');
-const GuildConfig = require('../models/guildconfig');
+  ButtonBuilder } from 'discord.js';
+import GuildConfig from '../models/guildconfig.js';
 
-module.exports = async (client) => {
+export default async (client) => {
   client.on('voiceStateUpdate', async (oldState, newState) => {
     const guild = newState.guild;
     const guildConfig = await GuildConfig.findOne({ guildId: guild.id });

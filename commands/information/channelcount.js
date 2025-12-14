@@ -1,5 +1,5 @@
 
-module.exports = {
+export default {
     name: 'channelcount',
     aliases : ['cc'],
     category: 'info',

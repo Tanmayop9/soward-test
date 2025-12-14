@@ -1,7 +1,7 @@
-const { EmbedBuilder ,ActionRowBuilder , ButtonBuilder , ButtonStyle } = require('discord.js')
+import { EmbedBuilder ,ActionRowBuilder , ButtonBuilder , ButtonStyle } from 'discord.js';
 
 // Command
-module.exports = {
+export default {
     name: 'invite',
     aliases: ['in'],
     category: 'info',

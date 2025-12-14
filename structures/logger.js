@@ -1,10 +1,10 @@
-const chalk = require('chalk');
-const moment = require('moment');
+import chalk from 'chalk';
+import moment from 'moment';
 
 /**
  * Modern logger with structured logging and log levels
  */
-module.exports = class Logger {
+export default class Logger {
     static logLevel = process.env.LOG_LEVEL || 'info';
     static levels = {
         error: 0,

@@ -1,6 +1,6 @@
-const { AuditLogEvent , PermissionFlagsBits } = require('discord.js')
+import { AuditLogEvent , PermissionFlagsBits } from 'discord.js';
 
-module.exports = async (client) => {
+export default async (client) => {
     client.on('stickerDelete', async (sticker) => {
         let check =  await client.util.BlacklistCheck(sticker.guild)
         if(check) return  

@@ -1,6 +1,6 @@
-const { getSettings } = require('../models/mainrole')
-const { Guild, PermissionsBitField } = require('discord.js')
-module.exports = async (client) => {
+import { getSettings } from '../models/mainrole.js';
+import { Guild, PermissionsBitField } from 'discord.js';
+export default async (client) => {
     /*
      * @param {Message} message
      * @param {Guild} guild

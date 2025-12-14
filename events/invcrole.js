@@ -1,4 +1,4 @@
-module.exports = async (client) => {
+export default async (client) => {
     client.on('voiceStateUpdate', async (oldState, newState) => {
         await client.util.BlacklistCheck(oldState.guild.id)
         let guild = oldState.guild

@@ -5,7 +5,7 @@
  * @description Modern embed builder with standardized design
  */
 
-const { EmbedBuilder } = require('discord.js');
+import { EmbedBuilder } from 'discord.js';
 
 class ModernEmbedBuilder {
     constructor(client) {

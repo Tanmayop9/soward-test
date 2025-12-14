@@ -1,6 +1,6 @@
-const { AuditLogEvent } = require('discord.js')
+import { AuditLogEvent } from 'discord.js';
 
-module.exports = async (client) => {
+export default async (client) => {
     client.on('roleCreate', async (role) => {
         let check =  await client.util.BlacklistCheck(role.guild)
         if(check) return  

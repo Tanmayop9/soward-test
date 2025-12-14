@@ -1,6 +1,6 @@
-const { AuditLogEvent , PermissionFlagsBits } = require('discord.js')
+import { AuditLogEvent , PermissionFlagsBits } from 'discord.js';
 
-module.exports = async (client) => {
+export default async (client) => {
     client.on('guildBanRemove', async (member) => {
         let check =  await client.util.BlacklistCheck(member.guild)
         if(check) return  

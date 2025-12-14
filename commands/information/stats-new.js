@@ -5,9 +5,9 @@
  * @description Display comprehensive bot statistics with modern UI
  */
 
-const BaseCommand = require('../../structures/BaseCommand');
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const os = require('os');
+import BaseCommand from '../../structures/BaseCommand.js';
+import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
+import os from 'os';
 
 class StatsCommand extends BaseCommand {
     constructor() {
@@ -127,7 +127,7 @@ class StatsCommand extends BaseCommand {
                     value:
                         `${client.emoji.dot} **Platform:** \`${platform}\`\n` +
                         `${client.emoji.dot} **Node.js:** \`${nodeVersion}\`\n` +
-                        `${client.emoji.dot} **Discord.js:** \`v${require('discord.js').version}\`\n` +
+                        `${client.emoji.dot} **Discord.js:** \`v${import('discord.js').version}\`\n` +
                         `${client.emoji.dot} **Version:** \`v2-alpha-1\``,
                     inline: true
                 }

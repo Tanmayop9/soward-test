@@ -1,4 +1,4 @@
-const { Message, Client, MessageEmbed } = require('discord.js');
+import { Message, Client, MessageEmbed } from 'discord.js';
 
 const compliments = {
     genius: [
@@ -116,7 +116,7 @@ async function getUserFromMention(message, mention) {
     return message.guild.members.fetch(id)  ||  message.member;
 }
 
-module.exports = {
+export default {
     name: 'Intelligence',
     aliases: ['iq'],
     category: 'info',

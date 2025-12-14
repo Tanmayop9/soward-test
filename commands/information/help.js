@@ -5,9 +5,9 @@
  * @description Modern help command with improved UI
  */
 
-const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require('discord.js');
+import { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'help',
     aliases: ['h', 'commands'],
     category: 'info',

@@ -1,10 +1,8 @@
-const {
-    Message,
+import { Message,
     Client,
-    EmbedBuilder
-} = require('discord.js')
+    EmbedBuilder } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'vclist',
     category: 'voice',
     premium: true,

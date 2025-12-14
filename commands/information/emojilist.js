@@ -1,5 +1,5 @@
 
-module.exports = {
+export default {
     name: 'emojilist',
     aliases: ['emojis'],
     category: 'info',

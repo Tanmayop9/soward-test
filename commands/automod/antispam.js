@@ -2,8 +2,8 @@ const enable = `<:bitzxier_disable_no:1180518054518587454><:bitzxier_enable_yes:
 const disable = `<:biztxier_disable_yes:1180432405501333617><:bitzxier_enable_no:1180432231282516050>`
 const protect = `<a:bitzxier_antinuke:1180431827438153821>`
 const hii = `<:bitzxier:1180449001934442516>`
-const wait = require('wait')
-module.exports = {
+import wait from 'wait';
+export default {
     name: 'antispam',
     aliases: [],
     cooldown: 5,

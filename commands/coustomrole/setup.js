@@ -1,10 +1,8 @@
-const {
-    PermissionsBitField,
+import { PermissionsBitField,
     ButtonBuilder,
     ActionRowBuilder,
-    inlineCode
-} = require('discord.js')
-module.exports = {
+    inlineCode } from 'discord.js';
+export default {
     name: 'setup',
     aliases: ['customrole'],
     subcommand: ['add', 'remove', 'config', 'reset', 'list', 'reqrole'],

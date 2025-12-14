@@ -1,4 +1,7 @@
-module.exports = {
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+export default {
     name: 'reload',
     aliases: ['rlcmd'],
     category: 'owner',

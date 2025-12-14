@@ -1,13 +1,11 @@
-const {
-    Message,
+import { Message,
     Client,
     EmbedBuilder,
     ActionRowBuilder,
     ButtonBuilder,
-    ButtonStyle
-} = require('discord.js')
+    ButtonStyle } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'logreset',
     aliases: ['resetlog','resetlogs'],
     category: 'logging',

@@ -5,8 +5,8 @@
  * @description Centralized error handling for the application
  */
 
-const chalk = require('chalk');
-const { IGNORED_ERROR_CODES } = require('./constants');
+import chalk from 'chalk';
+import { IGNORED_ERROR_CODES } from './constants.js';
 
 /**
  * Custom error classes for better error handling
@@ -147,7 +147,7 @@ class ErrorHandler {
     }
 }
 
-module.exports = {
+export default {
     ErrorHandler,
     BotError,
     DatabaseError,

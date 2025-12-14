@@ -1,8 +1,8 @@
-const { EmbedBuilder, AuditLogEvent, ChannelType, WebhookClient } = require('discord.js'); // Ensure correct import
-const discordTranscripts = require('discord-html-transcripts');
+import { EmbedBuilder, AuditLogEvent, ChannelType, WebhookClient } from 'discord.js';
+import discordTranscripts from 'discord-html-transcripts';
+import wait from 'wait';
 
-module.exports = async (client) => {
-  const wait = require('wait')
+export default async (client) => {
     client.on('messageDelete', async (message) => {
       let check = await client.db.get(`blacklistserver_${client.user.id}`) || [];
       if (check.includes(message?.guild?.id)) return;

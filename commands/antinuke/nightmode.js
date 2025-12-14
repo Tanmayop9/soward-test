@@ -1,10 +1,13 @@
-const Discord = require('discord.js')
-const { PermissionsBitField } = require('discord.js')
-const mongoose = require('mongoose')
-const wait = require('wait')
+import Discord from 'discord.js';
+import { PermissionsBitField } from 'discord.js';
+import mongoose from 'mongoose';
+import wait from 'wait';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
 const saixd = ['259176352748404736', '1180425876798701588']
 
-this.config = require(`${process.cwd()}/config.json`)
+// Config loaded from client.config
 
 mongoose.connect(this.config.MONGO_DB, {
     useNewUrlParser: true,
@@ -16,7 +19,7 @@ const RolePermissionSchema = new mongoose.Schema({
     adminPermissions: BigInt
 })
 const rolePermissionSchema = mongoose.model('Nightmode', RolePermissionSchema)
-module.exports = {
+export default {
     name: 'nightmode',
     aliases: [],
     cooldown: 10,

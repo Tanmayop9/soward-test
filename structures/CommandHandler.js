@@ -5,7 +5,7 @@
  * @description Modern command handler with improved organization
  */
 
-const { Collection } = require('discord.js');
+import { Collection } from 'discord.js';
 
 class CommandHandler {
     constructor(client) {

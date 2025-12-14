@@ -1,9 +1,7 @@
-const {
-    Message,
+import { Message,
     Client,
-EmbedBuilder
-} = require('discord.js')
-module.exports = {
+EmbedBuilder } from 'discord.js';
+export default {
     name: 'logall',
     aliases: [],
     category: 'logging',

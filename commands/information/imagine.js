@@ -1,10 +1,16 @@
-const { Worker } = require("worker_threads");
-const path = require("path");
-const fs = require("fs").promises;
-const { WebhookClient } = require("discord.js");
+import { Worker } from 'worker_threads';
+import path from 'path';
+import fs from 'fs';.promises;
+import { WebhookClient } from 'discord.js';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const webhook = new WebhookClient({ url: "https://discord.com/api/webhooks/1363422335356502087/byToNA4dqUIXFPFRVHCjBOp7UTgnuQl9BxUEAjKYYonUj488kK4UO60osJIPo2gJG1Ma" });
 
-module.exports = {
+export default {
     name: 'imagine',
     category: 'info',
     premium: false,

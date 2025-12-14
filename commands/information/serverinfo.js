@@ -1,5 +1,5 @@
-const { EmbedBuilder, ChannelType } = require('discord.js');
-const moment = require('moment');
+import { EmbedBuilder, ChannelType } from 'discord.js';
+import moment from 'moment';
 
 const verificationLevels = {
     0: 'None',
@@ -19,7 +19,7 @@ const booster = {
 const disabled = '<:bitzxier_crosss:1180470543896551438>';
 const enabled = '<:bitzxier_tick:1180470648053702657>';
 
-module.exports = {
+export default {
     name: 'serverinfo',
     category: 'info',
     aliases: ['si'],

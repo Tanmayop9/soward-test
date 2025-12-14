@@ -1,8 +1,8 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const lodash = require('lodash');
+import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
+import lodash from 'lodash';
 // Pagination function is available via client.util.pagination
 
-module.exports = {
+export default {
     name: 'list',
     aliases: ['l'],
 	subcommand : ['admin','mod','bot','inrole','booster','roles','noroles','muted','joinpos','bans'],

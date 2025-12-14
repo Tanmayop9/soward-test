@@ -1,5 +1,4 @@
-const {
-    EmbedBuilder,
+import { EmbedBuilder,
     Collection,
     WebhookClient,
     ButtonStyle,
@@ -9,13 +8,15 @@ const {
     AttachmentBuilder,
     PermissionsBitField,
     ChannelType,
-    Partials
-} = require('discord.js')
-const { getSettingsar } = require('../models/autorole')
+    Partials } from 'discord.js';
+import { getSettingsar } from '../models/autorole.js';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
-this.config = require(`${process.cwd()}/config.json`)
+
+// Config loaded from client.config
 let globalCooldown
-module.exports = class Util {
+export default class Util {
     constructor(client) {
         this.client = client
         this.blacklistCache = new Map();
@@ -766,7 +767,7 @@ module.exports = class Util {
         return totalCount;
     };
      async manageAfk(message, client) {
-        const db = require('../models/afk.js');
+        import db from '../models/afk.js';
         let data = await db.findOne({
             Member: message.author.id,
             $or: [
@@ -893,7 +894,7 @@ module.exports = class Util {
 	}
 
    async pagination(membersList, title, client, message) {
-    const lodash = require('lodash');
+    import lodash from 'lodash';
     
     // Split members list into chunks of 10 items per page
     const pages = lodash.chunk(membersList, 10);
@@ -1084,7 +1085,7 @@ module.exports = class Util {
     
 
     async sendBooster(guild, member) {
-        const db = require(`${process.cwd()}/models/boost.js`)
+        const { default: db } = await import(`${process.cwd()}/models/boost.js`)
         const data = await db.findOne({ Guild: guild.id })
         if (!data || !data.Boost) return
         try {
@@ -1113,7 +1114,7 @@ module.exports = class Util {
     }
 
     async pagination(message, description, desc = '') {
-        const lodash = require('lodash')
+        import lodash from 'lodash';
         let previousbut = new ButtonBuilder()
             .setCustomId('queueprev')
             .setEmoji('<:ARROW1:1182736084766036059>')
@@ -1200,7 +1201,7 @@ module.exports = class Util {
         return [...new Set(arr)]
     }
  async generateLatencyChart(ws_latency, database) {
-        const QuickChart = require("quickchart-js"); 
+        import QuickChart from 'quickchart-js'; 
 
         let data = await this.client.util._generateLatencyData(ws_latency, database);
         // Create and configure the chart
@@ -1217,7 +1218,7 @@ module.exports = class Util {
     
     // Private method for generating latency data
     async _generateLatencyData(ws_latency, database) {
-        const QuickChart = require("quickchart-js");
+        import QuickChart from 'quickchart-js';
 
         // Data generation logic (like in the previous example)
         let data = [];
@@ -1230,7 +1231,7 @@ module.exports = class Util {
     
     // Private method to generate a single data point
     _generateLatency(wsl, msg) {
-        const QuickChart = require("quickchart-js");
+        import QuickChart from 'quickchart-js';
 
         let rnd = Math.random();
         wsl = parseInt(wsl + Math.floor(rnd * (-wsl * 0.05 - wsl * 0.05)) + wsl * 0.05);
@@ -1240,7 +1241,7 @@ module.exports = class Util {
     
     // Private method for generating chart configuration
     _generateChartConfig(ws_latency, database, data) {
-        const QuickChart = require("quickchart-js");
+        import QuickChart from 'quickchart-js';
 
         return {
             type: "line",

@@ -1,7 +1,7 @@
-const { EmbedBuilder } = require('discord.js')
-const db = require('../../models/boost.js')
+import { EmbedBuilder } from 'discord.js';
+import db from '../../models/boost.js';
 
-module.exports = {
+export default {
     name: 'setboost',
     aliases: ['boost'],
     category: 'info',

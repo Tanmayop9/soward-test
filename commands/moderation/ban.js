@@ -1,6 +1,6 @@
-const { Message, Client, EmbedBuilder } = require('discord.js')
+import { Message, Client, EmbedBuilder } from 'discord.js';
 const saixd = ['1207801591890190367']
-module.exports = {
+export default {
     name: 'ban',
     aliases: ['hackban', 'fuckban', 'fuckoff'],
     category: 'mod',

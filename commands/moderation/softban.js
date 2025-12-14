@@ -1,6 +1,6 @@
-const { Message, Client, MessageEmbed } = require('discord.js')
+import { Message, Client, MessageEmbed } from 'discord.js';
 const saixd = ['1143155471159664710']
-module.exports = {
+export default {
     name: 'softban',
     aliases: [],
     category: 'mod',

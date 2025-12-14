@@ -1,6 +1,7 @@
-const { EmbedBuilder, AuditLogEvent, ChannelType, WebhookClient } = require('discord.js'); // Ensure correct imports
-const wait = require('wait')
-module.exports = async (client) => {
+import { EmbedBuilder, AuditLogEvent, ChannelType, WebhookClient } from 'discord.js';
+import wait from 'wait';
+
+export default async (client) => {
 
   async function logPermissionChanges(action, oldChannel, newChannel, target, overwrite) {
     try {

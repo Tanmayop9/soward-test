@@ -1,5 +1,5 @@
 
-module.exports = async (client) => {
+export default async (client) => {
     client.on('messageCreate', async (message) => {
         if (message.author.bot || message.author.system || !message.guild)
             return

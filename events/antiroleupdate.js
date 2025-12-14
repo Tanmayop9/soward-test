@@ -1,6 +1,6 @@
-const { getSettings } = require('../models/mainrole')
-const { AuditLogEvent , PermissionsBitField } = require('discord.js')
-module.exports = async (client) => {
+import { getSettings } from '../models/mainrole.js';
+import { AuditLogEvent , PermissionsBitField } from 'discord.js';
+export default async (client) => {
     /* Anti Role Update */
     client.on('roleUpdate', async (o, n) => {
         let check =  await client.util.BlacklistCheck(o.guild)

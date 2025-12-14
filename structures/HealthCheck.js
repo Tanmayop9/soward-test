@@ -5,8 +5,8 @@
  * @description Health check and monitoring utilities
  */
 
-const os = require('os');
-const express = require('express');
+import os from 'os';
+import express from 'express';
 
 class HealthCheck {
     constructor(client) {

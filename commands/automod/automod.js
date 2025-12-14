@@ -1,6 +1,6 @@
-const { StringSelectMenuBuilder, ComponentType, ActionRowBuilder,ButtonBuilder,ButtonStyle } = require('discord.js');
+import { StringSelectMenuBuilder, ComponentType, ActionRowBuilder,ButtonBuilder,ButtonStyle } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'automod',
     aliases: [],
     cooldown: 5,

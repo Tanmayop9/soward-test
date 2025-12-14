@@ -1,8 +1,8 @@
-const { Message, Client, EmbedBuilder, PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, Collection,PermissionFlagsBits } = require('discord.js');
-const moment = require('moment');
-require('moment-duration-format');
+import { Message, Client, EmbedBuilder, PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, Collection,PermissionFlagsBits } from 'discord.js';
+import moment from 'moment';
+import('moment-duration-format');
 
-module.exports = {
+export default {
     name: 'role',
     aliases: ['r'],
     category: 'mod',

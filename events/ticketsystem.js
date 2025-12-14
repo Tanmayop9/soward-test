@@ -1,13 +1,13 @@
-const { ButtonBuilder, ActionRowBuilder, EmbedBuilder, ButtonStyle } = require('discord.js');
-const ticketPanelSchema = require('../models/ticket');
-const discordTranscripts = require('discord-html-transcripts');
+import { ButtonBuilder, ActionRowBuilder, EmbedBuilder, ButtonStyle } from 'discord.js';
+import ticketPanelSchema from '../models/ticket.js';
+import discordTranscripts from 'discord-html-transcripts';
 const transcriptCooldowns = new Map();
 const closeCooldowns = new Map();
 const deleteCooldowns = new Map();
 const closeRenameCooldowns = new Map(); // Cooldown map for renaming
 const openRenameCooldowns = new Map(); // Cooldown map for renaming
 
-module.exports = async (client) => {
+export default async (client) => {
   client.on("interactionCreate", async (i) => {
     try {
       if (i.isButton()) {

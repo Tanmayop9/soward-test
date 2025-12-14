@@ -1,7 +1,7 @@
-const { EmbedBuilder } = require('discord.js')
-const { getSettingsar } = require('../../models/autorole')
+import { EmbedBuilder } from 'discord.js';
+import { getSettingsar } from '../../models/autorole.js';
 
-module.exports = {
+export default {
     name: 'welcometest',
     category: 'welcomer',
     premium: false,

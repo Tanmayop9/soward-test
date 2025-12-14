@@ -1,11 +1,9 @@
-const {
-    Message,
+import { Message,
     Client,
     EmbedBuilder,
     MessageActionRow,
-    MessageButton
-} = require('discord.js')
-module.exports = {
+    MessageButton } from 'discord.js';
+export default {
     name: 'modlog',
     aliases: [],
     category: 'logging',

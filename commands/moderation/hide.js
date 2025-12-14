@@ -1,11 +1,9 @@
-const {
-    Message,
+import { Message,
     Client,
     EmbedBuilder,
-    PermissionsBitField
-} = require('discord.js');
+    PermissionsBitField } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'hide',
     aliases: [],
     category: 'mod',

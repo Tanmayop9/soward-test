@@ -5,10 +5,13 @@
  * @description Update premium access for a user
  */
 
-const { EmbedBuilder } = require('discord.js')
-const config = require(`${process.cwd()}/config.json`)
+import { EmbedBuilder } from 'discord.js';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
-module.exports = {
+// Config loaded from client.config
+
+export default {
     name: 'updatepremium',
     aliases: ['updateprem', 'upremium', 'editpremium'],
     category: 'Owner',

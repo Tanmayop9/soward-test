@@ -1,12 +1,13 @@
-const {
-    EmbedBuilder,
+import { EmbedBuilder,
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
     ActionRowBuilder,
     ButtonBuilder,
-    ButtonStyle
-} = require('discord.js');
-const config = require(`${process.cwd()}/config.json`);
+    ButtonStyle } from 'discord.js';
+// Config loaded from client.config
 
-module.exports = {
+export default {
     name: 'shards',
     aliases: ['cluster', 'clusters'],
     category: 'owner',

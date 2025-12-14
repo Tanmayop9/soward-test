@@ -1,7 +1,13 @@
-const { parentPort, workerData } = require("worker_threads");
-const rexzimagine = require("image-genv3");
-const path = require("path");
-const fs = require("fs").promises;
+import { parentPort, workerData } from 'worker_threads';
+import rexzimagine from 'image-genv3';
+import path from 'path';
+import fs from 'fs';.promises;
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 
 (async () => {
   try {

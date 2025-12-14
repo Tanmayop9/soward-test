@@ -8,7 +8,7 @@ const saixd = [
     '1207801591890190367'
 ];
 
-module.exports = {
+export default {
     name: 'extraowner',
     aliases: [],
     category: 'security',

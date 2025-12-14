@@ -1,8 +1,8 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionsBitField } = require('discord.js');
-const { parse } = require('twemoji-parser');
-const fetch = require('node-fetch');
+import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionsBitField } from 'discord.js';
+import { parse } from 'twemoji-parser';
+import fetch from 'node-fetch';
 
-module.exports = {
+export default {
     name: 'steal',
     aliases: [],
     cooldown: 5,

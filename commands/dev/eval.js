@@ -1,7 +1,10 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle ,StringSelectMenuBuilder } = require('discord.js');
+import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle ,StringSelectMenuBuilder } from 'discord.js';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
-this.config = require(`${process.cwd()}/config.json`)
-module.exports = {
+
+// Config loaded from client.config
+export default {
     name: 'eval',
     aliases: ['ev', 'jaduexe'],
     category: 'owner',
@@ -13,7 +16,7 @@ module.exports = {
         return result
             .then((output) => {
                 if (typeof output !== 'string') {
-                    output = require('util').inspect(output, { depth: 0 })
+                    output = import('util').inspect(output, { depth: 0 })
                 }
                 output = output
                     .replaceAll(client.token, 'T0K3N')

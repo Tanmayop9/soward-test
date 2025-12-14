@@ -74,4 +74,4 @@ const getSettingsar = async (guild) => {
     return await model.getSettingsar(guild);
 };
 
-module.exports = { getSettingsar, setDb };
+export default { getSettingsar, setDb };

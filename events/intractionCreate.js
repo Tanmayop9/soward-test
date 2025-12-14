@@ -1,6 +1,6 @@
-const { Events } = require('discord.js');
+import { Events } from 'discord.js';
 
-module.exports = async (client) => {
+export default async (client) => {
     client.on(Events.InteractionCreate, async (interaction) => {
         if (interaction.isStringSelectMenu()) {
             await client.util.selectMenuHandle(interaction);

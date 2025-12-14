@@ -1,8 +1,8 @@
-const { MessageEmbed, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
-const moment = require('moment');
-const os = require('os');
+import { MessageEmbed, ButtonBuilder, ActionRowBuilder, ButtonStyle } from 'discord.js';
+import moment from 'moment';
+import os from 'os';
 
-module.exports = {
+export default {
     name: 'stats',
     category: 'info',
     aliases: ['botinfo', 'bi'],

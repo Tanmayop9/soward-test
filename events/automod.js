@@ -1,4 +1,4 @@
-module.exports = async (client) => {
+export default async (client) => {
     //ANTI LINK
     client.on('messageCreate', async (message) => {
         if (message.author.bot) return
@@ -818,7 +818,7 @@ client.on('messageUpdate', async (oldMessage, newMessage) => {
 
     //ANTI NSFW
    /*
-    const FormData = require('form-data');
+    import FormData from 'form-data';
 
     client.on('messageCreate', async (message) => {
         let check = await client.db.get(`blacklistserver_${client.user.id}`) || [];

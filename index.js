@@ -5,10 +5,21 @@
  * @description Main entry point for Friday Discord Bot
  */
 
-require('dotenv').config();
-require('module-alias/register');
-const Friday = require('./structures/friday.js');
-const config = require(`${process.cwd()}/config.json`);
+import { config as dotenvConfig } from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { createRequire } from 'module';
+import Friday from './structures/friday.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
+
+dotenvConfig();
+
+const config = await import(`${process.cwd()}/config.json`, {
+    assert: { type: 'json' }
+}).then(module => module.default);
 
 // Create client instance
 const client = new Friday();
@@ -24,6 +35,10 @@ const client = new Friday();
         console.log('║     Recoded by: Nerox Studios         ║');
         console.log('║     Version: v2-alpha-1               ║');
         console.log('╚════════════════════════════════════════╝\n');
+
+        // Load configuration
+        client.logger.log('Loading configuration...');
+        await client.loadConfig();
 
         // Setup centralized error handlers
         client.errorHandler.setupGlobalHandlers();
@@ -53,7 +68,7 @@ const client = new Friday();
 
         // Login to Discord
         client.logger.log('Connecting to Discord...');
-        await client.login(config.TOKEN);
+        await client.login(client.config.TOKEN);
 
         // Start health check server if enabled
         if (process.env.HEALTH_CHECK_PORT) {

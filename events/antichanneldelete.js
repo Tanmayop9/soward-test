@@ -1,8 +1,8 @@
-const { AuditLogEvent } = require('discord.js');
+import { AuditLogEvent } from 'discord.js';
 const guildChannelMap = new Map();
 const creationQueue = new Map();
 
-module.exports = async (client) => {
+export default async (client) => {
     client.on('channelDelete', async (channel) => {
         let check = await client.util.BlacklistCheck(channel.guild);
         if (check) return;

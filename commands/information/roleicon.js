@@ -1,8 +1,8 @@
 
-const { EmbedBuilder } = require("discord.js");
-const axios = require("axios");
+import { EmbedBuilder } from 'discord.js';
+import axios from 'axios';
 
-module.exports = {
+export default {
     name: 'roleicon',
     category: 'info',
     premium: false,

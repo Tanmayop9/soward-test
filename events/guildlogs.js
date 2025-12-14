@@ -1,6 +1,6 @@
-const { EmbedBuilder, WebhookClient } = require('discord.js');
+import { EmbedBuilder, WebhookClient } from 'discord.js';
 
-module.exports = async (client) => {
+export default async (client) => {
     const join = new WebhookClient({ url: `https://discord.com/api/webhooks/1257574696736526376/mKlUL4g23ttY-skiTQSEK5ZdtP-vHhQFjG0eobStOosBJNw1wZdRt5yyxjjOXHp4niqk` });
     const leave = new WebhookClient({ url: `https://discord.com/api/webhooks/1257574713278857267/1WnTFM4Z4o-VI9cSgsya7iYcQ1GE4_-wbm5apylfcuGaizuYH9oZ6isMU_Er9cFk5P_M` });
 

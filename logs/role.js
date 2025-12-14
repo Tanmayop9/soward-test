@@ -1,7 +1,7 @@
-const { AuditLogEvent, EmbedBuilder, PermissionsBitField, WebhookClient } = require('discord.js'); // Ensure correct imports
-const wait = require('wait')
+import { AuditLogEvent, EmbedBuilder, PermissionsBitField, WebhookClient } from 'discord.js';
+import wait from 'wait';
 
-module.exports = async (client) => {
+export default async (client) => {
   client.on("roleCreate", async (role) => {
     let check =  await client.util.BlacklistCheck(role.guild)
     if(check) return 

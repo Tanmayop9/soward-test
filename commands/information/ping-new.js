@@ -5,8 +5,8 @@
  * @description Check bot latency and response time with modern design
  */
 
-const BaseCommand = require('../../structures/BaseCommand');
-const { EmbedBuilder } = require('discord.js');
+import BaseCommand from '../../structures/BaseCommand.js';
+import { EmbedBuilder } from 'discord.js';
 
 class PingCommand extends BaseCommand {
     constructor() {

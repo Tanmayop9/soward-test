@@ -1,7 +1,7 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType } = require('discord.js');
-const axios = require('axios');
+import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType } from 'discord.js';
+import axios from 'axios';
 
-module.exports = {
+export default {
     name: 'banner',
     aliases: [],
     category: 'info',

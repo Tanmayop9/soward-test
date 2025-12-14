@@ -1,12 +1,10 @@
-const {
-    Message,
+import { Message,
     Client,
     EmbedBuilder,
     MessageActionRow,
-    MessageButton
-} = require('discord.js')
+    MessageButton } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'showlogs',
     aliases: ["logconfig","viewlogs"],
     category: 'logging',

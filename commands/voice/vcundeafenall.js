@@ -1,6 +1,6 @@
-const { MessageEmbed } = require('discord.js');
+import { MessageEmbed } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'vcundeafenall',
     category: 'voice',
     run: async (client, message, args) => {

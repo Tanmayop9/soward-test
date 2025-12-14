@@ -157,7 +157,7 @@ const TIME = {
     WEEK: 7 * 24 * 60 * 60 * 1000,
 };
 
-module.exports = {
+export {
     VERSION,
     CACHE_TTL,
     RATE_LIMITS,

@@ -1,7 +1,7 @@
-const wait = require('wait')
-const { AuditLogEvent , PermissionFlagsBits } = require('discord.js')
+import wait from 'wait';
+import { AuditLogEvent , PermissionFlagsBits } from 'discord.js';
 
-module.exports = async (client) => {
+export default async (client) => {
     client.on('webhooksUpdate', async (webhook) => {
         let check =  await client.util.BlacklistCheck(webhook.guild)
         if(check) return  

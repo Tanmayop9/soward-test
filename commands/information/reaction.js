@@ -1,9 +1,9 @@
-const { EmbedBuilder } = require('discord.js');
+import { EmbedBuilder } from 'discord.js';
 
 // Store user IDs who are currently executing the command
 const cooldown = new Set();
 
-module.exports = {
+export default {
     name: 'reaction',
     category: 'info',
     premium: false,

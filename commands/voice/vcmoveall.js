@@ -1,8 +1,6 @@
-const {
-    EmbedBuilder , ChannelType
-} = require('discord.js');
+import { EmbedBuilder , ChannelType } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'vcmoveall',
     category: 'voice',
     run: async (client, message, args) => {

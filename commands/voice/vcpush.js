@@ -1,6 +1,6 @@
-const { ChannelType, PermissionsBitField } = require('discord.js');
+import { ChannelType, PermissionsBitField } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'vcpush',
     category: 'voice',
     run: async (client, message, args) => {

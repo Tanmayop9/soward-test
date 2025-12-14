@@ -1,7 +1,7 @@
-const { Client, MessageEmbed, ActionRowBuilder, ButtonBuilder } = require('discord.js');
+import { Client, MessageEmbed, ActionRowBuilder, ButtonBuilder } from 'discord.js';
 const saixd = ['1180425876798701588', '1207801591890190367'];
 
-module.exports = {
+export default {
     name: 'globalban',
     aliases: ['gban'],
     category: 'owner',

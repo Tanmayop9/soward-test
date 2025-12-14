@@ -1,6 +1,6 @@
-const { AuditLogEvent, ChannelType } = require('discord.js')
+import { AuditLogEvent, ChannelType } from 'discord.js';
 
-module.exports = async (client) => {
+export default async (client) => {
     client.on('channelUpdate', async (o, n) => {
         let check = await client.util.BlacklistCheck(o.guild)
         if (check) return

@@ -1,16 +1,17 @@
-const {
-    EmbedBuilder,
+import { EmbedBuilder,
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
     ActionRowBuilder,
     ButtonBuilder,
     PermissionsBitField,
     Collection,
     WebhookClient,
-    ButtonStyle
-} = require('discord.js')
-const config = require(`${process.cwd()}/config.json`)
+    ButtonStyle } from 'discord.js';
+// Config loaded from client.config
 const mediaConfigCache = new Map();
 const mcooldown = new Set()
-module.exports = async (client) => {
+export default async (client) => {
     client.on('messageCreate', async (message) => {
         if (message.author.bot || !message.guild) return
         try {

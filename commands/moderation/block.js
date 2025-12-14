@@ -1,11 +1,9 @@
-const {
-    Message,
+import { Message,
     Client,
     EmbedBuilder,
-    PermissionFlagsBits
-} = require('discord.js')
+    PermissionFlagsBits } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'block',
     aliases: [],
     category: 'mod',

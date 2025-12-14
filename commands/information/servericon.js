@@ -1,12 +1,10 @@
-const {
-    Message,
+import { Message,
     Client,
     EmbedBuilder,
     ButtonBuilder,
-    ActionRowBuilder
-} = require('discord.js')
+    ActionRowBuilder } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'servericon',
     aliases: ['serverav', 'serveravatar'],
     category: 'info',

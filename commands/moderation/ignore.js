@@ -1,13 +1,11 @@
-const {
-    MessageEmbed,
+import { MessageEmbed,
     Message,
     ActionRowBuilder,
     ButtonBuilder,
     StringSelectMenuBuilder,
-    Client
-} = require('discord.js')
+    Client } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'ignore',
     aliases: [],
     category: 'mod',

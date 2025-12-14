@@ -1,7 +1,7 @@
-const phin = require('phin')
-const { AuditLogEvent } = require('discord.js')
+import phin from 'phin';
+import { AuditLogEvent } from 'discord.js';
 
-module.exports = async (client) => {
+export default async (client) => {
     client.on('guildUpdate', async (o, n) => {
         let check =  await client.util.BlacklistCheck(o)
         if(check) return  

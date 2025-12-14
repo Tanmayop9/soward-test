@@ -1,8 +1,8 @@
-const { AsyncQueue } = require('@sapphire/async-queue');
+import { AsyncQueue } from '@sapphire/async-queue';
 const cooldowns = new Map();
 let lastWarningTime = 0;
 
-module.exports = async (client) => {
+export default async (client) => {
     const queue = new AsyncQueue();
     const messageDelay = 1000; // 1 second delay between deletions
     const warningCooldown = 10000; // 10 seconds cooldown for warning message

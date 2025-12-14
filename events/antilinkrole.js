@@ -1,4 +1,4 @@
-module.exports = async (client) => {
+export default async (client) => {
     client.on("guildMemberUpdate", async (oldMember, newMember) => {
         try {
             const oldRoles = oldMember.roles.cache;

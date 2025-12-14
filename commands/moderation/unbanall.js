@@ -1,6 +1,6 @@
-const { Message, Client, EmbedBuilder } = require('discord.js')
+import { Message, Client, EmbedBuilder } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'unbanall',
     aliases: [],
     category: 'mod',

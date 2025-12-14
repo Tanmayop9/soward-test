@@ -1,7 +1,7 @@
-const {  WebhookClient, Permissions} = require("discord.js");
-const wait = require('wait')
+import { WebhookClient, Permissions } from 'discord.js';
+import wait from 'wait';
 
-module.exports = async (client) => {
+export default async (client) => {
     client.on('voiceStateUpdate', async (oldState, newState) => {
       let check =  await client.util.BlacklistCheck(oldState.guild)
       if(check) return  

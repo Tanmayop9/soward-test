@@ -1,8 +1,8 @@
 
-const { text } = require('figlet')
-const wait = require('wait')
+import { text } from 'figlet';
+import wait from 'wait';
 
-module.exports = {
+export default {
     name: 'antiinvite',
     aliases: [],
     cooldown: 5,

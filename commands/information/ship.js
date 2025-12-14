@@ -1,7 +1,7 @@
-const { EmbedBuilder } = require('discord.js');
-const canvafy = require('canvafy');
+import { EmbedBuilder } from 'discord.js';
+import canvafy from 'canvafy';
 
-module.exports = {
+export default {
     name: 'ship',
     aliases: ['shiprandom'],
     category: 'info',

@@ -1,11 +1,12 @@
-const {
-    Message,
+import { Message,
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
     Client,
     ActionRowBuilder,
-    ButtonBuilder
-} = require('discord.js')
-this.config = require(`${process.cwd()}/config.json`)
-module.exports = {
+    ButtonBuilder } from 'discord.js';
+// Config loaded from client.config
+export default {
     name: 'blacklist',
     aliases: ['bl'],
     category: 'owner',

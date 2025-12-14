@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     name: 'snipe',
     aliases: [],
     category: 'info',

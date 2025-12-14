@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     name: 'panicmode',
     aliases: ['panic', 'pn'],
     category: 'security',

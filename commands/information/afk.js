@@ -1,7 +1,7 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle , InteractionCollector} = require('discord.js');
-const db = require('../../models/afk.js');
+import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle , InteractionCollector } from 'discord.js';
+import db from '../../models/afk.js';
 
-module.exports = {
+export default {
     name: 'afk',
     description: "Set's You Away From Keyboard",
     category: 'info',

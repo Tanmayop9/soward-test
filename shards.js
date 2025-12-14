@@ -5,9 +5,19 @@
  * @description Cluster manager for Friday Discord Bot
  */
 
-const { ClusterManager, HeartbeatManager } = require('discord-hybrid-sharding');
-const axios = require('axios');
-const config = require('./config.json');
+import { ClusterManager, HeartbeatManager } from 'discord-hybrid-sharding';
+import axios from 'axios';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { createRequire } from 'module';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
+
+const config = await import('./config.json', {
+    assert: { type: 'json' }
+}).then(module => module.default);
 
 // Initialize cluster manager
 const manager = new ClusterManager(`${__dirname}/index.js`, {

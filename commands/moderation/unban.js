@@ -1,7 +1,7 @@
 
-const { EmbedBuilder, PermissionsBitField } = require('discord.js');
+import { EmbedBuilder, PermissionsBitField } from 'discord.js';
 
-module.exports = {
+export default {
     name: 'unban',
     category: 'mod',
     premium: false,
