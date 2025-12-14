@@ -3,6 +3,10 @@ import { Josh } from '@joshdb/core';
 import path from 'path';
 
 class Database {
+    private provider: any;
+    private db: any;
+    private connected: boolean;
+
     constructor() {
         // Main database for general key-value storage
         this.provider = new JoshProvider({

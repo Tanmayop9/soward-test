@@ -8,7 +8,8 @@
 import { EmbedBuilder } from 'discord.js';
 
 class ModernEmbedBuilder {
-    constructor(client) {
+    constructor(client: any) {
+        this.client = client;
         this.client = client;
         this.defaultColor = client?.color || 0x5865F2;
     }

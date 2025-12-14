@@ -47,7 +47,10 @@ class PermissionError extends BotError {
  * Main error handler class
  */
 class ErrorHandler {
-    constructor(client) {
+    private client: any;
+    private ignoredCodes: string[];
+
+    constructor(client: any) {
         this.client = client;
         this.ignoredCodes = IGNORED_ERROR_CODES;
     }
@@ -147,10 +150,5 @@ class ErrorHandler {
     }
 }
 
-export default {
-    ErrorHandler,
-    BotError,
-    DatabaseError,
-    CommandError,
-    PermissionError,
-};
+export { ErrorHandler, BotError, DatabaseError, CommandError, PermissionError };
+export default ErrorHandler;

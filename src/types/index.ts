@@ -5,7 +5,7 @@
  * @description TypeScript type definitions for Friday Discord Bot
  */
 
-import { Message } from 'discord.js';
+import type { Message } from 'discord.js';
 
 export interface BotConfig {
     TOKEN: string;

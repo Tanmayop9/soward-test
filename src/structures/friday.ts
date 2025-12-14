@@ -5,7 +5,7 @@ import Database from './database';
 import { ClusterClient, getInfo } from 'discord-hybrid-sharding';
 import Sql from 'better-sqlite3';
 import { Destroyer } from 'destroyer-fast-cache';
-import { ErrorHandler } from './ErrorHandler';
+import ErrorHandler from './ErrorHandler';
 import ConfigValidator from './ConfigValidator';
 import CommandHandler from './CommandHandler';
 import PremiumManager from './PremiumManager';

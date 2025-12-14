@@ -2,7 +2,7 @@ import { StringSelectMenuBuilder,
     ButtonBuilder,
     ActionRowBuilder,
     ButtonStyle } from 'discord.js';
-import { Friday } from '../../structures/friday';
+import Friday from '../../structures/friday';
 export default {
     name: 'whitelist',
     aliases: ['wl'],

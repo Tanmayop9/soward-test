@@ -9,7 +9,9 @@ import os from 'os';
 import express from 'express';
 
 class HealthCheck {
-    constructor(client) {
+    private client: any;
+    constructor(client: any) {
+        this.client = client;
         this.client = client;
         this.startTime = Date.now();
     }

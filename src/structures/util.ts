@@ -4,18 +4,21 @@ import { EmbedBuilder,
     ButtonStyle,
     ActionRowBuilder,
     ButtonBuilder,
-    StringSelectMenuBuilder,
-    AttachmentBuilder,
     PermissionsBitField,
     ChannelType,
     Partials } from 'discord.js';
 import { getSettingsar } from '../models/autorole';
 
 // Config is loaded asynchronously from client.config
-let globalCooldown
+let globalCooldown: any;
 export default class Util {
-    constructor(client) {
-        this.client = client
+    private client: any;
+    private blacklistCache: Map<string, any>;
+    private lastBlacklistRefresh: number;
+    private BLACKLIST_CACHE_DURATION: number;
+
+    constructor(client: any) {
+        this.client = client;
         this.blacklistCache = new Map();
         this.lastBlacklistRefresh = 0;
         this.BLACKLIST_CACHE_DURATION = 5 * 60 * 1000; // 5 minutes cache duration
