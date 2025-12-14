@@ -232,7 +232,7 @@ export default class Friday extends Client {
     
     async loadConfig() {
         const config = await import(`${process.cwd()}/config.json`, {
-            assert: { type: 'json' }
+            with: { type: 'json' }
         }).then(module => module.default);
         this.config = config;
         

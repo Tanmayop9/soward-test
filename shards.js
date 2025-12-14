@@ -16,7 +16,7 @@ const __dirname = dirname(__filename);
 const require = createRequire(import.meta.url);
 
 const config = await import('./config.json', {
-    assert: { type: 'json' }
+    with: { type: 'json' }
 }).then(module => module.default);
 
 // Initialize cluster manager

@@ -103,6 +103,11 @@ Successfully converted the entire Friday Discord Bot codebase from CommonJS (req
 ## Breaking Changes
 None - The conversion maintains backward compatibility with all existing functionality.
 
+## Known Issues / Recommendations
+
+### Database Connection in Commands
+The `nightmode.js` command initializes a mongoose connection within the command execution. This should ideally be moved to application startup to avoid multiple connection attempts and race conditions. Consider refactoring this in a future update.
+
 ## Testing Recommendations
 
 Before deploying to production:

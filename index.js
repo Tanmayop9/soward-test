@@ -18,7 +18,7 @@ const require = createRequire(import.meta.url);
 dotenvConfig();
 
 const config = await import(`${process.cwd()}/config.json`, {
-    assert: { type: 'json' }
+    with: { type: 'json' }
 }).then(module => module.default);
 
 // Create client instance

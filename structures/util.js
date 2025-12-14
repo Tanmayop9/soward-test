@@ -10,11 +10,8 @@ import { EmbedBuilder,
     ChannelType,
     Partials } from 'discord.js';
 import { getSettingsar } from '../models/autorole.js';
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
 
-
-// Config loaded from client.config
+// Config is loaded asynchronously from client.config
 let globalCooldown
 export default class Util {
     constructor(client) {
