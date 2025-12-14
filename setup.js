@@ -21,7 +21,7 @@ const SHUTDOWN_TIMEOUT = 10000; // 10 seconds
  * @param {string} command - Command to execute
  * @param {string[]} args - Command arguments
  * @param {string} description - Description of the step
- * @returns {Promise<number>} Resolves with exit code on success, rejects with Error on failure
+ * @returns {Promise<number>} Resolves with 0 on success, rejects with Error on failure
  */
 function executeCommand(command, args, description) {
     return new Promise((resolve, reject) => {
