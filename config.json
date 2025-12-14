@@ -1,6 +1,8 @@
 {
     "TOKEN": "",
     "WEBHOOK_URL": "",
+    "ERROR_WEBHOOK_URL": "",
+    "RATELIMIT_WEBHOOK_URL": "",
     "cooldown": true,
     "owner": [],
     "friday": [],

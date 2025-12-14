@@ -729,7 +729,7 @@ buttonCollector.on('collect', async interaction => {
         `${++i}. <#${entry.id}> | (${entry.id})`
     );
 
-    await client.util.BitzxierPagination(membersList, `Whitelisted ${type} for ${category}`, client, message);
+    await client.util.pagination(membersList, `Whitelisted ${type} for ${category}`, client, message);
 
     await interaction.update({ content: `Displaying whitelisted ${type} for ${category}.`, components: [] });
 });

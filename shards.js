@@ -21,35 +21,59 @@ const manager = new ClusterManager(`${__dirname}/index.js`, {
 const webhookUrl = config.WEBHOOK_URL;
 
 /**
- * Send logs to Discord webhook
+ * Send logs to Discord webhook with rate limiting
  * @param {string} message - Message to log
  * @param {string} type - Log type (info, warn, error)
  */
+const webhookQueue = [];
+let isProcessingWebhook = false;
+
 async function logToWebhook(message, type = 'info') {
     if (!webhookUrl) return;
-    
+
     const colors = {
-        info: 0x5865F2,
-        warn: 0xFFA500,
-        error: 0xFF0000,
-        success: 0x00FF00
+        info: 0x5865f2,
+        warn: 0xffa500,
+        error: 0xff0000,
+        success: 0x00ff00,
     };
 
-    try {
-        await axios.post(webhookUrl, {
-            embeds: [{
-                title: `🔷 Friday Cluster Manager`,
+    webhookQueue.push({
+        embeds: [
+            {
+                title: '🔷 Friday Cluster Manager',
                 description: message,
                 color: colors[type] || colors.info,
                 footer: {
-                    text: 'Author: Tanmay | Recoded by Nerox Studios | v2-alpha-1'
+                    text: 'Author: Tanmay | Recoded by Nerox Studios | v2-alpha-1',
                 },
-                timestamp: new Date().toISOString()
-            }]
-        });
+                timestamp: new Date().toISOString(),
+            },
+        ],
+    });
+
+    if (!isProcessingWebhook) {
+        processWebhookQueue();
+    }
+}
+
+async function processWebhookQueue() {
+    if (webhookQueue.length === 0) {
+        isProcessingWebhook = false;
+        return;
+    }
+
+    isProcessingWebhook = true;
+    const payload = webhookQueue.shift();
+
+    try {
+        await axios.post(webhookUrl, payload);
     } catch (error) {
         console.error('[Webhook] Failed to send log:', error.message);
     }
+
+    // Wait 1 second before processing next item to avoid rate limits
+    setTimeout(() => processWebhookQueue(), 1000);
 }
 
 // Display startup banner

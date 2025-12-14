@@ -1,13 +1,17 @@
-const { Client, Collection, Partials, WebhookClient, Options } = require('discord.js')
-const fs = require('fs')
-const Utils = require('./util')
-const { glob } = require('glob')
-const { promisify } = require('util')
-const Database = require('./database')
-const axios = require('axios')
+const { Client, Collection, Partials, WebhookClient } = require('discord.js');
+const fs = require('fs');
+const Utils = require('./util');
+const Database = require('./database');
 const { ClusterClient, getInfo } = require('discord-hybrid-sharding');
-const Sql = require('better-sqlite3')
-const { Destroyer } = require('destroyer-fast-cache')
+const Sql = require('better-sqlite3');
+const { Destroyer } = require('destroyer-fast-cache');
+const { ErrorHandler } = require('./ErrorHandler');
+const ConfigValidator = require('./ConfigValidator');
+const CommandHandler = require('./CommandHandler');
+const PremiumManager = require('./PremiumManager');
+const HealthCheck = require('./HealthCheck');
+const CacheManager = require('./CacheManager');
+const { COLORS, EMOJIS, VERSION } = require('./constants');
 module.exports = class Friday extends Client {
     constructor() {
         super({
@@ -25,107 +29,94 @@ module.exports = class Friday extends Client {
             interval: 300,
             lifetime: 1800
         }} })
-        this.setMaxListeners(Infinity)
-       this.cluster = new ClusterClient(this);
-        this.config = require(`${process.cwd()}/config.json`)
-        this.logger = require('./logger')
-		this.ready = false
-        this.rateLimits = new Collection()
-        this.commands = new Collection()
-        this.categories = fs.readdirSync('./commands/')
-        this.emoji = {
-            tick: '✅',
-            cross: '❌',
-            dot: '•',
-            process : '⏳',
-            disable : '🔴',
-            enable : '🟢',
-            protect : '🛡️',
-            hii : '👋'
+        this.setMaxListeners(Infinity);
+        this.cluster = new ClusterClient(this);
+        this.config = require(`${process.cwd()}/config.json`);
+        
+        // Validate configuration
+        const validation = ConfigValidator.validate(this.config);
+        if (!validation.success) {
+            console.error('Configuration validation failed:', validation.errors);
+            process.exit(1);
         }
+        if (validation.warnings.length > 0) {
+            console.warn('Configuration warnings:', validation.warnings);
+        }
+        
+        this.logger = require('./logger');
+        this.ready = false;
+        this.rateLimits = new Collection();
+        this.commands = new Collection();
+        this.categories = fs.readdirSync('./commands/');
+        
+        // Use constants for emojis and colors
+        this.emoji = EMOJIS;
+        this.color = COLORS.PRIMARY;
+        this.version = VERSION.FULL;
 
-        this.util = new Utils(this)
-        this.color = 0x5865F2
+        this.util = new Utils(this);
         this.support = `https://discord.gg/S7Ju9RUpbT`
         this.cooldowns = new Collection()
-        this.snek = require('axios')
-        this.ratelimit = new WebhookClient({
-            url: 'https://discord.com/api/webhooks/1269946396434497568/-r5ZOP0b0kGG4ZM6Rh1DUTkbrBopQYrJYg0ujy8IzXy2G0hZFzBqMwTJYOHio39OrJlt'
-        })
-        this.error = new WebhookClient({
-            url: 'https://discord.com/api/webhooks/1180429380321804289/hK4ERW6vGMAjvO1VuGXyuKre60Zw1X3xkHhVChshBn7mNhhbtPODOeB1S1LFF_hZpTNp'
-        })
+        // Initialize webhooks only if URLs are provided in config
+        this.ratelimit = this.config.RATELIMIT_WEBHOOK_URL
+            ? new WebhookClient({ url: this.config.RATELIMIT_WEBHOOK_URL })
+            : null;
+        this.error = this.config.ERROR_WEBHOOK_URL
+            ? new WebhookClient({ url: this.config.ERROR_WEBHOOK_URL })
+            : null;
 
+        // Initialize modern helper classes
+        this.errorHandler = new ErrorHandler(this);
+        this.commandHandler = new CommandHandler(this);
+        this.premiumManager = new PremiumManager(this);
+        this.healthCheck = new HealthCheck(this);
+        this.cacheManager = new CacheManager();
+
+        // Use centralized error handler for client errors
         this.on('error', (error) => {
-   		 if (error.code == 10008) return;
-   		 if (error.code == 4000) return;
-    	if (error.code == 10001) return;
-    	if (error.code == 10003) return;
-    	if (error.code == 10004) return;
-    	if (error.code == 10005) return;
-    	if (error.code == 50001) return;
-    	if (error.code == 10062) return;
-    	if (error.code == 50013) return;
-    	if (error.code == 50035) return;
-            this.error.send(`\`\`\`js\n${error.stack}\`\`\``)
-        })
-        process.on('unhandledRejection', (error) => {
-            this.error.send(`\`\`\`js\n${error.stack}\`\`\``)
-        })
-        process.on('uncaughtException', (error) => {
-            this.error.send(`\`\`\`js\n${error.stack}\`\`\``)
-        })
-        process.on('warning', (warn) => {
-            this.error.send(`\`\`\`js\n${warn}\`\`\``)
-        })
-        process.on('uncaughtExceptionMonitor', (err, origin) => {
-            this.error.send(`\`\`\`js\n${err},${origin}\`\`\``)
-        })
-		process.on('uncaughtException', (error) => {
-   		 if (error.code == 10008) return;
-   		 if (error.code == 4000) return;
-    	if (error.code == 10001) return;
-    	if (error.code == 10003) return;
-    	if (error.code == 10004) return;
-    	if (error.code == 10005) return;
-    	if (error.code == 50001) return;
-    	if (error.code == 10062) return;
-    	if (error.code == 50013) return;
-    	if (error.code == 50035) return;
-    	console.error(error);
-});
-process.on("triggerUncaughtException", (error) => {
-    console.error(error);
-});
+            this.errorHandler.handle(error, { source: 'clientError' });
+        });
 
-this.rest.on('rateLimited', (info) => {
- this.ratelimit.send(`\`\`\`js\nTimeout: ${info.retryAfter},\nLimit: ${info.limit},\nMethod: ${info.method},\nPath: ${info.hash},\nRoute: ${info.route},\nGlobal: ${info.global}\nURL : ${info.url}\nScope : ${info.scope}\nMajorParameter : ${info.majorParameter}\`\`\``)
-   const { route, retryAfter, limit, remaining, resetAfter,timeout } = info;
-  this.rateLimits.set(route, {
+        // Modern rate limit handler with adaptive backoff
+        this.rest.on('rateLimited', (info) => {
+            const { route, retryAfter, limit, remaining, resetAfter, timeout } = info;
 
-    timeout,
+            // Log to webhook if available
+            if (this.ratelimit) {
+                const message = [
+                    '```js',
+                    `Timeout: ${info.retryAfter}`,
+                    `Limit: ${info.limit}`,
+                    `Method: ${info.method}`,
+                    `Route: ${info.route}`,
+                    `Global: ${info.global}`,
+                    `URL: ${info.url}`,
+                    `Scope: ${info.scope}`,
+                    '```',
+                ].join('\n');
+                this.ratelimit.send(message).catch(() => {});
+            }
 
-    limit,
+            // Store rate limit info
+            this.rateLimits.set(route, {
+                timeout,
+                limit,
+                remaining,
+                resetAfter,
+                lastReset: Date.now(),
+            });
 
-    remaining,
+            // Implement adaptive backoff strategy
+            const now = Date.now();
+            const rateLimit = this.rateLimits.get(route);
+            const timeLeft = rateLimit.resetAfter - (now - rateLimit.lastReset);
+            const backoffTime = Math.min(Math.max(timeLeft, 1000), 60000);
 
-    resetAfter,
-
-    lastReset: Date.now()
-
-  });
-
-  // Implement adaptive backoff strategy
-
-  const now = Date.now();
-
-  const timeLeft = this.rateLimits.get(route).resetAfter - (now - this.rateLimits.get(route).lastReset);
-
-  const backoffTime = Math.min(Math.max(timeLeft, 1000), 60000); // Adjust minimum and maximum backoff times as needed
-(async () => {
-  await new Promise(resolve => setTimeout(resolve, backoffTime));
-})()
-});
+            // Non-blocking backoff
+            setTimeout(() => {
+                this.rateLimits.delete(route);
+            }, backoffTime);
+        });
 
     }
 
